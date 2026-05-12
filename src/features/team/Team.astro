@@ -1,0 +1,27 @@
+---
+import type { TeamMember } from "../../types";
+import TeamMemberCard from "./TeamMemberCard.astro";
+
+interface Props {
+  team: TeamMember[];
+}
+
+const { team } = Astro.props;
+---
+
+<section id="team" class="py-24">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl mb-4">The <span class="text-gradient">Team</span></h2>
+      <p class="text-slate-400 max-w-2xl mx-auto">
+        Meet the dedicated group of individuals working behind the scenes to make LumbiniX 2026 an unforgettable experience.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
+      {team.map((member) => (
+        <TeamMemberCard member={member} />
+      ))}
+    </div>
+  </div>
+</section>

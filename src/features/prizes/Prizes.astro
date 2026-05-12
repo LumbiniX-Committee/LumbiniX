@@ -1,0 +1,27 @@
+---
+import type { Prize } from "../../types";
+import PrizeCard from "./PrizeCard.astro";
+
+interface Props {
+  prizes: Prize[];
+}
+
+const { prizes } = Astro.props;
+---
+
+<section id="prizes" class="py-24 bg-bg-alt/30">
+  <div class="container-custom">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl mb-4">Win Amazing <span class="text-gradient">Prizes</span></h2>
+      <p class="text-slate-400 max-w-2xl mx-auto">
+        Compete for glory and substantial rewards. We're offering over $10k in total value to the best projects.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+      {prizes.map((prize, index) => (
+        <PrizeCard prize={prize} index={index} />
+      ))}
+    </div>
+  </div>
+</section>

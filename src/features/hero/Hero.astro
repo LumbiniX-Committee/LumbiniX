@@ -1,0 +1,44 @@
+---
+import type { EventMeta } from "../../types";
+import CountdownTimer from "./CountdownTimer";
+
+interface Props {
+  event: EventMeta;
+}
+
+const { event } = Astro.props;
+---
+
+<section class="relative pt-20 pb-32 overflow-hidden">
+  <!-- Decorative Elements -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full -z-10">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-10 w-72 h-72 bg-accent/20 rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="container-custom text-center">
+    <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary font-semibold text-sm mb-8 animate-fade-in shadow-sm">
+      <span class="relative flex h-2 w-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+      </span>
+      {event.date} • {event.venue}
+    </div>
+
+    <h1 class="text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight">
+      Build the Future <br /> 
+      <span class="text-gradient">at {event.name}</span>
+    </h1>
+
+    <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-12 font-medium">
+      {event.description}
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+      <a href={event.registrationUrl} class="btn-primary w-full sm:w-auto">Register Now</a>
+      <a href="/schedule" class="btn-secondary w-full sm:w-auto">View Schedule</a>
+    </div>
+
+    <CountdownTimer client:load targetDate={event.countdownDate} />
+  </div>
+</section>

@@ -1,0 +1,30 @@
+---
+import type { Speaker } from "../../types";
+import SpeakerCard from "./SpeakerCard.astro";
+
+interface Props {
+  speakers: Speaker[];
+}
+
+const { speakers } = Astro.props;
+---
+
+<section id="speakers" class="py-24">
+  <div class="container-custom">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+      <div class="max-w-2xl">
+        <h2 class="text-4xl md:text-5xl mb-4">Meet the <span class="text-gradient">Speakers</span></h2>
+        <p class="text-slate-400">
+          Learn from industry experts, visionary entrepreneurs, and master developers who are shaping the technological landscape.
+        </p>
+      </div>
+      <a href="#" class="btn-secondary whitespace-nowrap">Full Lineup</a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {speakers.map((speaker) => (
+        <SpeakerCard speaker={speaker} />
+      ))}
+    </div>
+  </div>
+</section>

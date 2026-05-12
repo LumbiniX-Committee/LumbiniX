@@ -1,0 +1,50 @@
+---
+import type { Sponsor } from "../../types";
+
+interface Props {
+  sponsors: Sponsor[];
+}
+
+const { sponsors } = Astro.props;
+
+const tiers = {
+  platinum: "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 max-w-3xl mx-auto h-48",
+  gold: "grid-cols-2 md:grid-cols-3 lg:grid-cols-3 h-32",
+  silver: "grid-cols-2 md:grid-cols-4 lg:grid-cols-4 h-24",
+  bronze: "grid-cols-3 md:grid-cols-6 lg:grid-cols-6 h-20",
+};
+
+const groupedSponsors = sponsors.reduce((acc, sponsor) => {
+  if (!acc[sponsor.tier]) acc[sponsor.tier] = [];
+  acc[sponsor.tier].push(sponsor);
+  return acc;
+}, {} as Record<string, Sponsor[]>);
+---
+
+<div class="space-y-20">
+  {Object.entries(groupedSponsors).map(([tier, tierSponsors]) => (
+    <div>
+      <h3 class="text-center text-sm font-bold uppercase tracking-widest text-slate-400 mb-10 flex items-center justify-center gap-4">
+        <div class="h-px w-12 bg-slate-200"></div>
+        {tier} Partners
+        <div class="h-px w-12 bg-slate-200"></div>
+      </h3>
+      <div class={`grid gap-8 items-center ${tiers[tier as keyof typeof tiers]}`}>
+        {tierSponsors.map((sponsor) => (
+          <a 
+            href={sponsor.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="glass-card p-6 h-full flex items-center justify-center group hover:border-primary/40 transition-all shadow-sm hover:shadow-md bg-white/50"
+          >
+            <img 
+              src={sponsor.logo} 
+              alt={sponsor.name} 
+              class="max-h-full max-w-full grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+            />
+          </a>
+        ))}
+      </div>
+    </div>
+  ))}
+</div>

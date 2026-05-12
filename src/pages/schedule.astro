@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../features/navbar/Navbar.astro";
+import Schedule from "../features/schedule/Schedule.astro";
+import Footer from "../features/footer/Footer.astro";
+import { schedule } from "../data/schedule";
+import { eventMeta } from "../data/event";
+---
+
+<BaseLayout 
+  title={`Schedule | ${eventMeta.name}`} 
+  description="Explore the full timeline of workshops, hacking sessions, and networking events at LumbiniX 2026."
+>
+  <Navbar />
+  <main class="pt-12">
+    <Schedule schedule={schedule} />
+  </main>
+  
+  <Footer />
+</BaseLayout>

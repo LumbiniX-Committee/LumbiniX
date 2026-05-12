@@ -1,0 +1,32 @@
+---
+import type { Sponsor } from "../../types";
+import SponsorGrid from "./SponsorGrid.astro";
+
+interface Props {
+  sponsors: Sponsor[];
+}
+
+const { sponsors } = Astro.props;
+---
+
+<section id="sponsors" class="py-24 overflow-hidden relative">
+  <!-- Background Glow -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary/5 rounded-full blur-[120px] -z-10"></div>
+
+  <div class="container-custom">
+    <div class="text-center mb-20">
+      <h2 class="text-4xl md:text-5xl mb-4">Our <span class="text-gradient">Partners</span></h2>
+      <p class="text-slate-400 max-w-2xl mx-auto">
+        Empowering the next generation of innovators. Supported by the world's leading technology companies.
+      </p>
+    </div>
+
+    <SponsorGrid sponsors={sponsors} />
+
+    <div class="mt-24 glass-card p-12 text-center max-w-4xl mx-auto">
+      <h3 class="text-2xl mb-4">Interested in Sponsoring?</h3>
+      <p class="text-slate-400 mb-8">Join us in making LumbiniX 2026 the best hackathon yet. Get in touch for our sponsorship prospectus.</p>
+      <a href="mailto:sponsors@lumbinix.tech" class="btn-secondary">Become a Partner</a>
+    </div>
+  </div>
+</section>

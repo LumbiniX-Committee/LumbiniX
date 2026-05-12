@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../features/navbar/Navbar.astro";
+import Prizes from "../features/prizes/Prizes.astro";
+import Footer from "../features/footer/Footer.astro";
+import { prizes } from "../data/prizes";
+import { eventMeta } from "../data/event";
+---
+
+<BaseLayout 
+  title={`Prizes | ${eventMeta.name}`} 
+  description="Discover the amazing rewards and trophies up for grabs at LumbiniX 2026."
+>
+  <Navbar />
+  <main class="pt-12">
+    <Prizes prizes={prizes} />
+  </main>
+  
+  <Footer />
+</BaseLayout>
