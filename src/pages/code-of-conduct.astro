@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navbar from "../features/navbar/Navbar.astro";
+import Footer from "../features/footer/Footer.astro";
+import CodeOfConduct from "../features/code-of-conduct/CodeOfConduct.astro";
+import { codeOfConductSections } from "../data/codeOfConduct";
+import { eventMeta } from "../data/event";
+---
+
+<BaseLayout
+  title={`Code of conduct | ${eventMeta.name}`}
+  description="LumbiniX hackathon rules: respect, venue, teams, AI assistance, judges, safety, disqualification, reporting, and participant agreement."
+>
+  <Navbar />
+  <main class="pt-12">
+    <CodeOfConduct sections={codeOfConductSections} />
+  </main>
+  <Footer />
+</BaseLayout>

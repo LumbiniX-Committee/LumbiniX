@@ -50,6 +50,18 @@ export interface TrackAward {
   perks: string;
 }
 
+export type CodeOfConductChunk =
+  | { type: "paragraph"; text: string }
+  | { type: "list"; items: string[] }
+  | { type: "subheading"; text: string };
+
+export interface CodeOfConductSection {
+  id: string;
+  number: number;
+  title: string;
+  chunks: CodeOfConductChunk[];
+}
+
 export interface TeamMemberProfile {
   name: string;
   role: string;
