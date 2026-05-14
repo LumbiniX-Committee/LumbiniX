@@ -1,0 +1,80 @@
+---
+interface Props {
+  registrationUrl: string;
+}
+
+const { registrationUrl } = Astro.props;
+---
+
+<section id="guidelines" class="py-24">
+  <div class="container-custom max-w-4xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-display text-slate-900 mb-4">
+        Selection process <span class="text-gradient">and guidelines</span>
+      </h2>
+      <p class="text-slate-600 leading-relaxed max-w-2xl mx-auto">
+        Ready to build for impact at LumbiniX? Read the process and requirements carefully before you
+        register your team.
+      </p>
+    </div>
+
+    <div class="glass-card p-8 md:p-10 space-y-10 text-left">
+      <div>
+        <h3 class="text-lg font-display text-slate-900 mb-3">Selection process</h3>
+        <ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm leading-relaxed">
+          <li>Only <strong class="text-slate-800">10 teams</strong> will be selected for the hackathon.</li>
+          <li>
+            If more than 10 teams register, a <strong class="text-slate-800">shortlisting round</strong>
+            will be conducted.
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-display text-slate-900 mb-3">Registration requirements</h3>
+        <p class="text-slate-600 text-sm mb-3">Teams must submit the following during registration:</p>
+        <ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm leading-relaxed">
+          <li>GitHub profile links for all team members</li>
+          <li>CVs for all team members</li>
+          <li>LinkedIn profiles (optional)</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-display text-slate-900 mb-3">Themes</h3>
+        <ul class="list-disc pl-5 space-y-2 text-slate-600 text-sm leading-relaxed">
+          <li>Themes will be shared by email prior to the hackathon.</li>
+          <li>
+            Each selected team will be assigned <strong class="text-slate-800">one theme</strong>; all
+            work during the event must align with that theme.
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-display text-slate-900 mb-3">Registration fee</h3>
+        <p class="text-slate-700 font-semibold">NPR 3,000 per team</p>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-display text-slate-900 mb-3">Selection criteria</h3>
+        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+          Teams receive a theme and must create a <strong class="text-slate-800">short pitching demo video</strong>
+          explaining their approach and submit it for evaluation. Up to
+          <strong class="text-slate-800">10 teams</strong> are selected from that evaluation.
+        </p>
+        <p class="text-slate-500 text-sm border-l-4 border-primary/30 pl-4 italic">
+          Please read these guidelines carefully before submitting your registration.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-12 text-center">
+      <p class="text-slate-600 mb-6 max-w-xl mx-auto leading-relaxed">
+        Join us in Lumbini for three days of building, learning, and community — bring your ideas and
+        your team.
+      </p>
+      <a href={registrationUrl} class="btn-primary inline-block"> Register for LumbiniX </a>
+    </div>
+  </div>
+</section>

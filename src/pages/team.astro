@@ -3,18 +3,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../features/navbar/Navbar.astro";
 import Team from "../features/team/Team.astro";
 import Footer from "../features/footer/Footer.astro";
-import { team } from "../data/team";
+import { eventLeads, organizingCommittee } from "../data/teamMembers";
 import { eventMeta } from "../data/event";
 ---
 
-<BaseLayout 
-  title={`Organizing Team | ${eventMeta.name}`} 
-  description="Meet the dedicated team behind the scenes of LumbiniX 2026."
+<BaseLayout
+  title={`Organizing Team | ${eventMeta.name}`}
+  description="Meet the Lumbini City College student organizing committee behind LumbiniX — event leads, roles, and team."
 >
   <Navbar />
   <main class="pt-12">
-    <Team team={team} />
+    <Team eventLeads={eventLeads} committee={organizingCommittee} />
   </main>
-  
+
   <Footer />
 </BaseLayout>

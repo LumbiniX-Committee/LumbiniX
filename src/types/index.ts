@@ -7,25 +7,22 @@ export interface EventMeta {
   countdownDate: string; // ISO format for countdown
 }
 
-export interface ScheduleEntry {
-  time: string;
+export interface RoadmapMilestone {
   title: string;
+  bsDate: string;
+  time: string;
   description: string;
-  location?: string;
-  type: 'workshop' | 'competition' | 'social' | 'logistics';
 }
 
-export interface Speaker {
-  name: string;
-  role: string;
-  company: string;
-  image: string;
-  bio: string;
-  socials?: {
-    twitter?: string;
-    linkedin?: string;
-    github?: string;
-  };
+export interface ScheduleDayRow {
+  time: string;
+  activity: string;
+}
+
+export interface ScheduleDayBlock {
+  dayTitle: string;
+  bsDay: string;
+  rows: ScheduleDayRow[];
 }
 
 export interface Sponsor {
@@ -44,16 +41,19 @@ export interface Prize {
   tier: string;
   amount: string;
   description: string;
-  image: string;
+  image?: string;
 }
 
-export interface TeamMember {
+export interface TrackAward {
+  title: string;
+  amount: string;
+  perks: string;
+}
+
+export interface TeamMemberProfile {
   name: string;
   role: string;
   image: string;
-  socials?: {
-    twitter?: string;
-    linkedin?: string;
-    github?: string;
-  };
+  twitterUrl: string;
+  linkedinUrl: string;
 }

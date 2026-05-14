@@ -1,6 +1,6 @@
 ---
 import type { Prize } from "../../types";
-import { Trophy } from "lucide-react";
+import { Gift } from "lucide-react";
 
 interface Props {
   prize: Prize;
@@ -10,35 +10,45 @@ interface Props {
 const { prize, index } = Astro.props;
 
 const isFirst = index === 0;
+const rank = index + 1;
+const placeLabels = ["First prize", "Second prize", "Third prize"] as const;
+const placeLabel = placeLabels[index] ?? `Place ${rank}`;
 ---
 
-<div class={`glass-card p-8 relative overflow-hidden group shadow-xl ${isFirst ? 'border-primary/40 ring-4 ring-primary/5 scale-105 z-10 bg-white' : 'bg-white/80'}`}>
-  {isFirst && (
-    <div class="absolute top-0 right-0 p-4">
-      <Trophy class="text-accent-dark animate-bounce" size={32} />
+<article
+  class:list={[
+    "relative rounded-2xl bg-white px-8 pb-10 pt-14 text-center shadow-md transition-shadow duration-300 hover:shadow-lg",
+    isFirst
+      ? "border-2 border-primary shadow-primary/10 ring-1 ring-primary/10 z-10"
+      : "border border-slate-200/90",
+  ]}
+>
+  <span
+    class:list={[
+      "absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border-2 font-display text-lg font-bold",
+      isFirst
+        ? "border-primary bg-primary/10 text-primary"
+        : "border-primary/50 bg-white text-primary",
+    ]}
+    aria-label={`Rank ${rank}`}
+  >
+    {rank}
+  </span>
+
+  <div class="mb-8 flex justify-center">
+    <div
+      class:list={[
+        "inline-flex rounded-full border-2 p-4 text-primary",
+        isFirst ? "border-primary bg-primary/5" : "border-primary/35 bg-primary/[0.04]",
+      ]}
+    >
+      <Gift size={40} strokeWidth={1.5} />
     </div>
-  )}
-  
-  <div class="mb-6">
-    <span class="text-sm font-bold uppercase tracking-widest text-primary mb-2 block">{prize.tier}</span>
-    <h3 class="text-4xl font-display font-bold text-slate-900 mb-4">{prize.amount}</h3>
-    <p class="text-slate-600 leading-relaxed text-sm">{prize.description}</p>
   </div>
 
-  <div class="aspect-video rounded-xl overflow-hidden mb-6 shadow-inner bg-slate-100">
-    <img 
-      src={prize.image} 
-      alt={prize.tier}
-      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-    />
-  </div>
-
-  <ul class="space-y-3">
-    {["Cash Prize", "Sponsor Swag", "Mentorship Access"].map((item) => (
-      <li class="flex items-center gap-3 text-sm text-slate-700 font-medium">
-        <div class="w-2 h-2 rounded-full bg-accent shadow-sm"></div>
-        {item}
-      </li>
-    ))}
-  </ul>
-</div>
+  <p class="font-display text-4xl font-bold tracking-tight text-slate-900 md:text-[2.75rem]">
+    {prize.amount}
+  </p>
+  <p class="mt-2 text-base font-medium text-slate-500">{placeLabel}</p>
+  <p class="mx-auto mt-5 max-w-[14rem] text-sm leading-relaxed text-slate-400">{prize.description}</p>
+</article>

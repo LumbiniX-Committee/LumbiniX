@@ -1,0 +1,23 @@
+---
+import type { TrackAward } from "../../types";
+import { Medal } from "lucide-react";
+
+interface Props {
+  award: TrackAward;
+}
+
+const { award } = Astro.props;
+---
+
+<article
+  class="relative rounded-2xl border border-slate-200/90 bg-white px-6 pb-8 pt-10 text-center shadow-md transition-shadow duration-300 hover:border-primary/25 hover:shadow-lg"
+>
+  <div class="mb-6 flex justify-center">
+    <div class="inline-flex rounded-full border-2 border-primary/35 bg-primary/[0.04] p-3.5 text-primary">
+      <Medal size={36} strokeWidth={1.5} />
+    </div>
+  </div>
+  <h3 class="text-lg font-display font-bold leading-snug text-slate-900 md:text-xl">{award.title}</h3>
+  <p class="mt-4 font-display text-3xl font-bold text-slate-900">{award.amount}</p>
+  <p class="mt-2 text-sm text-slate-500">{award.perks}</p>
+</article>

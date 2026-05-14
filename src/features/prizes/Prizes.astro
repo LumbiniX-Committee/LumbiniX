@@ -1,27 +1,64 @@
 ---
-import type { Prize } from "../../types";
 import PrizeCard from "./PrizeCard.astro";
+import TrackAwardCard from "./TrackAwardCard.astro";
+import type { Prize, TrackAward } from "../../types";
+import {
+  mainPrizes,
+  trackAwards,
+  prizePoolGrandTotalNPR,
+  prizePartnerPerksBracket,
+  prizeCeremonyNote,
+} from "../../data/prizes";
 
-interface Props {
-  prizes: Prize[];
-}
-
-const { prizes } = Astro.props;
+const totalFormatted = `NPR ${prizePoolGrandTotalNPR.toLocaleString("en-IN")}`;
 ---
 
-<section id="prizes" class="py-24 bg-bg-alt/30">
+<section id="prizes" class="bg-slate-50 py-20 md:py-24">
   <div class="container-custom">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl mb-4">Win Amazing <span class="text-gradient">Prizes</span></h2>
-      <p class="text-slate-400 max-w-2xl mx-auto">
-        Compete for glory and substantial rewards. We're offering over $10k in total value to the best projects.
+    <div class="mb-14 text-center">
+      <h2 class="text-4xl font-display font-bold tracking-tight text-slate-900 md:text-5xl">Prizes</h2>
+      <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600">
+        Cash, trophies, medals, certificates, and partner perks {prizePartnerPerksBracket} —{" "}
+        {prizeCeremonyNote}
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-      {prizes.map((prize, index) => (
+    <div class="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+      {mainPrizes.map((prize: Prize, index: number) => (
         <PrizeCard prize={prize} index={index} />
       ))}
+    </div>
+
+    <div class="mx-auto mt-20 max-w-5xl">
+      <h3 class="text-center text-2xl font-display font-bold text-slate-900 md:text-3xl">
+        Special category winners
+      </h3>
+      <p class="mx-auto mt-4 max-w-2xl text-center text-base leading-relaxed text-slate-600">
+        Track awards for social impact, Solana / blockchain depth, and standout AI &amp; tech — cash,
+        medal, and certificate. Additional partner benefits {prizePartnerPerksBracket} and full
+        eligibility rules — <strong class="text-slate-800">to be announced soon</strong>.
+      </p>
+      <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
+        {trackAwards.map((award: TrackAward) => (
+          <TrackAwardCard award={award} />
+        ))}
+      </div>
+    </div>
+
+    <div class="mx-auto mt-20 max-w-xl text-center">
+      <div class="rounded-2xl border border-slate-200/90 bg-white px-8 py-10 shadow-md">
+        <p class="text-sm font-semibold uppercase tracking-widest text-primary">Total prize pool</p>
+        <p class="mt-3 font-display text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
+          {totalFormatted}
+        </p>
+        <p class="mt-4 text-sm leading-relaxed text-slate-600">
+          Includes partner access {prizePartnerPerksBracket} alongside cash awards, trophies, medals,
+          and certificates.
+        </p>
+        <p class="mt-4 text-sm font-medium text-slate-500">
+          Full line-by-line breakdown, allocations, and other perks — coming soon.
+        </p>
+      </div>
     </div>
   </div>
 </section>

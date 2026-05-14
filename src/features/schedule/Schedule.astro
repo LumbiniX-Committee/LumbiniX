@@ -1,27 +1,32 @@
 ---
-import type { ScheduleEntry } from "../../types";
-import ScheduleCard from "./ScheduleCard.astro";
-
-interface Props {
-  schedule: ScheduleEntry[];
-}
-
-const { schedule } = Astro.props;
+import ScheduleSectionTimeline from "./ScheduleSectionTimeline.astro";
+import MainEventSchedule from "./MainEventSchedule.astro";
+import Guidelines from "./Guidelines.astro";
+import { registrationTimelineMilestones } from "../../data/registrationTimeline";
+import { onlineScheduleMilestones } from "../../data/onlineSchedule";
+import { eventScheduleDays } from "../../data/eventDays";
+import { eventMeta } from "../../data/event";
 ---
 
-<section id="schedule" class="py-24 bg-bg-alt/50">
-  <div class="container-custom">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl mb-4">Event <span class="text-gradient">Schedule</span></h2>
-      <p class="text-slate-400 max-w-2xl mx-auto">
-        Two days packed with innovation, learning, and networking. Don't miss a single beat of the action.
-      </p>
-    </div>
+<ScheduleSectionTimeline
+  id="registration-timeline"
+  eyebrow="Before the venue"
+  titleLead="Registration"
+  titleGradient="timeline"
+  description="Key Bikram Sambat (BS) dates for signing up, closing registration, and hearing whether your team is selected for the main event."
+  milestones={registrationTimelineMilestones}
+/>
 
-    <div class="max-w-4xl mx-auto">
-      {schedule.map((entry) => (
-        <ScheduleCard entry={entry} />
-      ))}
-    </div>
-  </div>
-</section>
+<ScheduleSectionTimeline
+  id="online-schedule"
+  eyebrow="Remote"
+  titleLead="Online"
+  titleGradient="schedule"
+  description="Virtual touchpoints so teams arrive on-site aligned on rules, themes, and tooling. Times and sessions can be adjusted as the program is finalized."
+  milestones={onlineScheduleMilestones}
+  variant="alt"
+/>
+
+<MainEventSchedule days={eventScheduleDays} />
+
+<Guidelines registrationUrl={eventMeta.registrationUrl} />

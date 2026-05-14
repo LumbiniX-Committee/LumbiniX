@@ -1,0 +1,62 @@
+---
+import type { RoadmapMilestone } from "../../types";
+
+interface Props {
+  id: string;
+  eyebrow: string;
+  titleLead: string;
+  titleGradient: string;
+  description: string;
+  milestones: RoadmapMilestone[];
+  variant?: "default" | "alt";
+}
+
+const { id, eyebrow, titleLead, titleGradient, description, milestones, variant = "default" } =
+  Astro.props;
+
+const bg =
+  variant === "alt"
+    ? "py-24 bg-bg-alt/50 border-y border-slate-100"
+    : "py-24";
+---
+
+<section id={id} class={bg}>
+  <div class="container-custom">
+    <div class="max-w-3xl mx-auto text-center mb-16">
+      <p class="text-primary font-semibold text-sm uppercase tracking-widest mb-3">{eyebrow}</p>
+      <h2 class="text-4xl md:text-5xl mb-4 font-display font-bold text-slate-900">
+        {titleLead} <span class="text-gradient">{titleGradient}</span>
+      </h2>
+      <p class="text-slate-600 leading-relaxed">
+        {description}
+      </p>
+    </div>
+
+    <div class="max-w-2xl mx-auto">
+      <ol class="relative">
+        {milestones.map((m, i) => (
+          <li class="relative pl-11 sm:pl-14 pb-12 last:pb-0">
+            {i < milestones.length - 1 && (
+              <span
+                class="absolute left-[15px] sm:left-[19px] top-5 bottom-0 w-px bg-slate-200"
+                aria-hidden="true"
+              />
+            )}
+            <span
+              class="absolute left-0 top-1.5 w-8 h-8 sm:w-10 sm:h-10 rounded-full border-4 border-white bg-primary shadow-md ring-2 ring-primary/15"
+              aria-hidden="true"
+            />
+            <article class="glass-card p-6 sm:p-7 text-left">
+              <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
+                <span class="text-xs font-bold uppercase tracking-wide text-primary">{m.bsDate}</span>
+                <span class="text-sm font-semibold text-slate-700 tabular-nums">{m.time}</span>
+              </div>
+              <h3 class="text-xl font-display text-slate-900 mb-2">{m.title}</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">{m.description}</p>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

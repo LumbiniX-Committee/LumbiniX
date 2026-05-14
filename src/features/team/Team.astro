@@ -1,27 +1,42 @@
 ---
-import type { TeamMember } from "../../types";
-import TeamMemberCard from "./TeamMemberCard.astro";
+import type { TeamMemberProfile } from "../../types";
+import TeamMemberShowcaseCard from "./TeamMemberShowcaseCard.astro";
 
 interface Props {
-  team: TeamMember[];
+  eventLeads: TeamMemberProfile[];
+  committee: TeamMemberProfile[];
 }
 
-const { team } = Astro.props;
+const { eventLeads, committee } = Astro.props;
 ---
 
 <section id="team" class="py-24">
   <div class="container-custom">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl mb-4">The <span class="text-gradient">Team</span></h2>
-      <p class="text-slate-400 max-w-2xl mx-auto">
-        Meet the dedicated group of individuals working behind the scenes to make LumbiniX 2026 an unforgettable experience.
+    <div class="max-w-3xl mx-auto text-center mb-14 md:mb-16">
+      <p class="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Organizing team</p>
+      <h2 class="text-4xl md:text-5xl mb-4 font-display font-bold text-slate-900">
+        Meet the minds behind <span class="text-gradient">LumbiniX</span>
+      </h2>
+      <p class="text-slate-600 leading-relaxed text-base md:text-lg">
+        Students from <span class="font-semibold text-slate-800">Lumbini City College</span> — diverse
+        roles, one mission: run an unforgettable hackathon where spirituality meets innovation.
       </p>
     </div>
 
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16">
-      {team.map((member) => (
-        <TeamMemberCard member={member} />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto mb-12 md:mb-14">
+      {eventLeads.map((m) => (
+        <TeamMemberShowcaseCard member={m} featured />
       ))}
     </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
+      {committee.map((m) => (
+        <TeamMemberShowcaseCard member={m} />
+      ))}
+    </div>
+
+    <p class="text-center text-slate-400 text-sm mt-12 max-w-xl mx-auto">
+      X links are placeholders until official handles are added in the team data file.
+    </p>
   </div>
 </section>

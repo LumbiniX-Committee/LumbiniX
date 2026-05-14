@@ -3,18 +3,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../features/navbar/Navbar.astro";
 import Prizes from "../features/prizes/Prizes.astro";
 import Footer from "../features/footer/Footer.astro";
-import { prizes } from "../data/prizes";
 import { eventMeta } from "../data/event";
 ---
 
-<BaseLayout 
-  title={`Prizes | ${eventMeta.name}`} 
-  description="Discover the amazing rewards and trophies up for grabs at LumbiniX 2026."
+<BaseLayout
+  title={`Prizes & prize pool | ${eventMeta.name}`}
+  description="LumbiniX prizes: main placements, special track awards, NPR 200,000 total pool, partner perks [Claude Pro, Canva Pro] — details expanding soon."
 >
   <Navbar />
   <main class="pt-12">
-    <Prizes prizes={prizes} />
+    <Prizes />
   </main>
-  
+
   <Footer />
 </BaseLayout>
