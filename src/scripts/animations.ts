@@ -68,4 +68,5 @@ if (typeof document !== 'undefined') {
   } else {
     initAnimations();
   }
+  document.addEventListener('astro:after-swap', initAnimations);
 }
