@@ -1,0 +1,37 @@
+---
+export type AnimationVariant = "up" | "down" | "left" | "right" | "scale";
+export type AnimationDuration = "fast" | "normal" | "slow";
+
+interface Props {
+  variant?: AnimationVariant;
+  duration?: AnimationDuration;
+  delay?: number;
+  threshold?: number;
+  class?: string;
+}
+
+const {
+  variant = "up",
+  duration = "normal",
+  delay = 0,
+  threshold = 0.15,
+  class: className,
+} = Astro.props;
+
+const durationMap: Record<AnimationDuration, number> = {
+  fast: 300,
+  normal: 500,
+  slow: 700,
+};
+---
+
+<div
+  data-animate
+  data-delay={delay}
+  data-threshold={threshold}
+  data-variant={variant}
+  class:list={[className, "opacity-0", `fade-${variant}`]}
+  style={`--fade-duration: ${durationMap[duration]}ms`}
+>
+  <slot />
+</div>

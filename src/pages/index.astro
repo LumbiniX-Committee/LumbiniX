@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import FadeIn from "../components/FadeIn.astro";
 import { eventMeta } from "../data/event";
 ---
 
@@ -24,18 +25,20 @@ import { eventMeta } from "../data/event";
       </div>
     </div>
 
-    <img
-      src="/lumbinix logo.png"
-      alt="LumbiniX"
-      class="mb-10 h-24 w-auto drop-shadow-sm md:h-32"
-      width="320"
-      height="120"
-    />
+    <FadeIn variant="scale" delay={0}>
+      <img
+        src="/lumbinix logo.png"
+        alt="LumbiniX"
+        class="mb-10 h-24 w-auto drop-shadow-sm md:h-32"
+        width="320"
+        height="120"
+      />
+    </FadeIn>
 
-
-    <h1 class="max-w-2xl font-display text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-6xl">
-      Something <span class="text-gradient">is coming</span>
-    </h1>
-
+    <FadeIn variant="up" delay={300}>
+      <h1 class="max-w-2xl font-display text-4xl font-bold leading-tight tracking-tight text-slate-900 md:text-6xl">
+        Something <span class="text-gradient">is coming</span>
+      </h1>
+    </FadeIn>
   </main>
 </BaseLayout>

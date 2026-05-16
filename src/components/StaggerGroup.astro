@@ -1,0 +1,28 @@
+---
+interface Props {
+  baseDelay?: number;
+  staggerDelay?: number;
+  threshold?: number;
+  variant?: "up" | "scale";
+  class?: string;
+}
+
+const {
+  baseDelay = 0,
+  staggerDelay = 100,
+  threshold = 0.1,
+  variant = "up",
+  class: className,
+} = Astro.props;
+---
+
+<div
+  class={className}
+  data-stagger-group
+  data-stagger-base-delay={baseDelay}
+  data-stagger-delay={staggerDelay}
+  data-stagger-threshold={threshold}
+  data-stagger-variant={variant}
+>
+  <slot />
+</div>

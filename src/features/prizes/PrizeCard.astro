@@ -16,8 +16,9 @@ const placeLabel = placeLabels[index] ?? `Place ${rank}`;
 ---
 
 <article
+  data-stagger-item
   class:list={[
-    "relative rounded-2xl bg-white px-8 pb-10 pt-14 text-center shadow-md transition-shadow duration-300 hover:shadow-lg",
+    "relative rounded-2xl bg-white px-8 pb-10 pt-14 text-center shadow-md transition-shadow duration-300 hover:shadow-lg hover:-translate-y-0.5",
     isFirst
       ? "border-2 border-primary shadow-primary/10 ring-1 ring-primary/10 z-10"
       : "border border-slate-200/90",

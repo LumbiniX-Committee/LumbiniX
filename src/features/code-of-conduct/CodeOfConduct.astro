@@ -1,5 +1,6 @@
 ---
 import type { CodeOfConductChunk, CodeOfConductSection } from "../../types";
+import FadeIn from "../../components/FadeIn.astro";
 
 interface Props {
   sections: CodeOfConductSection[];
@@ -8,50 +9,52 @@ interface Props {
 const { sections } = Astro.props;
 ---
 
-<section class="py-16 md:py-24" aria-labelledby="coc-heading">
-  <div class="container-custom max-w-3xl">
-    <header class="mb-14 text-center md:text-left">
-      <p class="text-primary font-semibold text-sm uppercase tracking-widest mb-3">LumbiniX</p>
-      <h1 id="coc-heading" class="text-4xl font-display font-bold tracking-tight text-slate-900 md:text-5xl">
-        Code of <span class="text-gradient">conduct</span>
-      </h1>
-      <p class="mt-4 text-lg leading-relaxed text-slate-600">
-        These rules keep the hackathon safe, fair, and respectful for everyone. Registration means you
-        accept them in full.
-      </p>
-    </header>
+<FadeIn variant="up" threshold={0.05}>
+  <section class="py-16 md:py-24 scroll-mt-24" aria-labelledby="coc-heading">
+    <div class="container-custom max-w-3xl">
+      <header class="mb-14 text-center md:text-left">
+        <p class="text-primary font-semibold text-sm uppercase tracking-widest mb-3">LumbiniX</p>
+        <h1 id="coc-heading" class="text-4xl font-display font-bold tracking-tight text-slate-900 md:text-5xl">
+          Code of <span class="text-gradient">conduct</span>
+        </h1>
+        <p class="mt-4 text-lg leading-relaxed text-slate-600">
+          These rules keep the hackathon safe, fair, and respectful for everyone. Registration means you
+          accept them in full.
+        </p>
+      </header>
 
-    <div class="space-y-12">
-      {sections.map((section) => (
-        <article
-          id={section.id}
-          class="glass-card border border-slate-200/80 p-6 md:p-8 scroll-mt-28"
-        >
-          <h2 class="text-xl font-display font-bold text-slate-900 md:text-2xl">
-            <span class="text-primary tabular-nums">{section.number}.</span>{" "}
-            {section.title}
-          </h2>
-          <div class="mt-6 space-y-5 text-slate-700">
-            {section.chunks.map((chunk: CodeOfConductChunk) => {
-              if (chunk.type === "paragraph") {
-                return <p class="text-base leading-relaxed">{chunk.text}</p>;
-              }
-              if (chunk.type === "subheading") {
+      <div class="space-y-12">
+        {sections.map((section) => (
+          <article
+            id={section.id}
+            class="glass-card border border-slate-200/80 p-6 md:p-8 scroll-mt-28"
+          >
+            <h2 class="text-xl font-display font-bold text-slate-900 md:text-2xl">
+              <span class="text-primary tabular-nums">{section.number}.</span>{" "}
+              {section.title}
+            </h2>
+            <div class="mt-6 space-y-5 text-slate-700">
+              {section.chunks.map((chunk: CodeOfConductChunk) => {
+                if (chunk.type === "paragraph") {
+                  return <p class="text-base leading-relaxed">{chunk.text}</p>;
+                }
+                if (chunk.type === "subheading") {
+                  return (
+                    <h3 class="text-sm font-bold uppercase tracking-wide text-primary">{chunk.text}</h3>
+                  );
+                }
                 return (
-                  <h3 class="text-sm font-bold uppercase tracking-wide text-primary">{chunk.text}</h3>
+                  <ul class="list-disc space-y-3 pl-5 text-base leading-relaxed marker:text-primary">
+                    {chunk.items.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
                 );
-              }
-              return (
-                <ul class="list-disc space-y-3 pl-5 text-base leading-relaxed marker:text-primary">
-                  {chunk.items.map((item) => (
-                    <li>{item}</li>
-                  ))}
-                </ul>
-              );
-            })}
-          </div>
-        </article>
-      ))}
+              })}
+            </div>
+          </article>
+        ))}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</FadeIn>

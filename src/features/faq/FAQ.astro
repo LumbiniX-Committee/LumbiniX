@@ -1,6 +1,7 @@
 ---
 import type { FAQ as FAQType } from "../../types";
 import FAQAccordion from "./FAQAccordion";
+import FadeIn from "../../components/FadeIn.astro";
 
 interface Props {
   faqs: FAQType[];
@@ -9,15 +10,17 @@ interface Props {
 const { faqs } = Astro.props;
 ---
 
-<section id="faq" class="py-24 bg-bg-alt/50">
-  <div class="container-custom">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl mb-4">Frequently Asked <span class="text-gradient">Questions</span></h2>
-      <p class="text-slate-400 max-w-2xl mx-auto">
-        Everything you need to know about the hackathon. Can't find what you're looking for? Reach out to us.
-      </p>
-    </div>
+<FadeIn variant="up" threshold={0.05}>
+  <section id="faq" class="py-24 bg-bg-alt/50 scroll-mt-24">
+    <div class="container-custom">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl mb-4">Frequently Asked <span class="text-gradient">Questions</span></h2>
+        <p class="text-slate-400 max-w-2xl mx-auto">
+          Everything you need to know about the hackathon. Can't find what you're looking for? Reach out to us.
+        </p>
+      </div>
 
-    <FAQAccordion client:visible faqs={faqs} />
-  </div>
-</section>
+      <FAQAccordion client:visible faqs={faqs} />
+    </div>
+  </section>
+</FadeIn>

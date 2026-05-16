@@ -2,7 +2,7 @@
 import { eventMeta } from "../../data/event";
 ---
 
-<footer class="py-16 border-t border-slate-100 bg-slate-50">
+<footer class="py-16 border-t border-slate-100 bg-slate-50" transition:name="footer">
   <div class="container-custom">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
       <div class="col-span-1 md:col-span-2">
@@ -15,7 +15,7 @@ import { eventMeta } from "../../data/event";
         </p>
         <div class="flex gap-4">
           {['Twitter', 'Discord', 'GitHub', 'LinkedIn'].map((social) => (
-            <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all shadow-sm">
+            <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all shadow-sm hover:-translate-y-0.5 hover:shadow-md">
               <span class="sr-only">{social}</span>
               <div class="w-5 h-5 bg-current mask-icon" style={`mask-image: url(/icons/${social.toLowerCase()}.svg)`}></div>
             </a>
@@ -33,7 +33,7 @@ import { eventMeta } from "../../data/event";
             { label: "Code of conduct", href: "/code-of-conduct" },
           ].map((link) => (
             <li>
-              <a href={link.href} class="text-slate-600 hover:text-primary font-medium transition-colors">
+              <a href={link.href} class="text-slate-600 hover:text-primary font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">
                 {link.label}
               </a>
             </li>
@@ -51,7 +51,7 @@ import { eventMeta } from "../../data/event";
             { label: "Press Kit", href: "#" },
           ].map((item) => (
             <li>
-              <a href={item.href} class="text-slate-600 hover:text-primary font-medium transition-colors">
+              <a href={item.href} class="text-slate-600 hover:text-primary font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-primary after:transition-all after:duration-300 hover:after:w-full">
                 {item.label}
               </a>
             </li>
@@ -62,12 +62,12 @@ import { eventMeta } from "../../data/event";
 
     <div class="pt-8 border-t border-slate-200 flex flex-col md:flex-row items-center justify-between gap-6">
       <p class="text-sm text-slate-500 font-medium">
-        © 2026 {eventMeta.name}. All rights reserved.
+        &copy; 2026 {eventMeta.name}. All rights reserved.
       </p>
       <div class="flex items-center gap-2 text-sm text-slate-400 font-medium">
         <span>Built with</span>
         <a href="https://astro.build" class="text-primary hover:underline">Astro</a>
-        <span>&</span>
+        <span>&amp;</span>
         <a href="https://react.dev" class="text-primary hover:underline">React</a>
       </div>
     </div>

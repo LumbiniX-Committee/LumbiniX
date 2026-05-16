@@ -24,8 +24,8 @@ export default function FAQAccordion({ faqs }: FAQAccordionProps) {
       {faqs.map((faq, index) => {
         const isOpen = openIndex === index;
         return (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className={cn(
               "glass-card transition-all duration-300",
               isOpen ? "border-primary/30 ring-1 ring-primary/10" : "hover:border-white/20"
@@ -35,22 +35,22 @@ export default function FAQAccordion({ faqs }: FAQAccordionProps) {
               onClick={() => setOpenIndex(isOpen ? null : index)}
               className="w-full flex items-center justify-between p-6 text-left"
             >
-              <span className="text-lg font-medium text-white">{faq.question}</span>
-              <ChevronDown 
-                size={20} 
+              <span className="text-lg font-semibold text-slate-800">{faq.question}</span>
+              <ChevronDown
+                size={20}
                 className={cn(
-                  "text-slate-400 transition-transform duration-300",
+                  "text-slate-400 transition-transform duration-300 shrink-0 ml-4",
                   isOpen && "rotate-180 text-primary"
-                )} 
+                )}
               />
             </button>
-            <div 
+            <div
               className={cn(
                 "overflow-hidden transition-all duration-300 ease-in-out",
                 isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
               )}
             >
-              <div className="p-6 pt-0 text-slate-400 leading-relaxed border-t border-white/5">
+              <div className="p-6 pt-0 text-slate-600 leading-relaxed border-t border-slate-100">
                 {faq.answer}
               </div>
             </div>

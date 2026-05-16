@@ -1,6 +1,7 @@
 ---
 import type { EventMeta } from "../../types";
 import CountdownTimer from "./CountdownTimer";
+import FadeIn from "../../components/FadeIn.astro";
 
 interface Props {
   event: EventMeta;
@@ -17,28 +18,48 @@ const { event } = Astro.props;
   </div>
 
   <div class="container-custom text-center">
-    <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary font-semibold text-sm mb-8 animate-fade-in shadow-sm">
-      <span class="relative flex h-2 w-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-      </span>
-      {event.date} • {event.venue}
-    </div>
+    <FadeIn variant="scale" delay={0}>
+      <img
+        src="/lumbinix logo.png"
+        alt="LumbiniX"
+        class="mb-10 h-24 w-auto drop-shadow-sm md:h-32 mx-auto"
+        width="320"
+        height="120"
+      />
+    </FadeIn>
 
-    <h1 class="text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight">
-      Build the Future <br /> 
-      <span class="text-gradient">at {event.name}</span>
-    </h1>
+    <FadeIn variant="up" delay={150}>
+      <div class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary font-semibold text-sm mb-8 shadow-sm">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+        </span>
+        {event.date} • {event.venue}
+      </div>
+    </FadeIn>
 
-    <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-12 font-medium">
-      {event.description}
-    </p>
+    <FadeIn variant="up" delay={300}>
+      <h1 class="text-5xl md:text-7xl lg:text-8xl mb-8 leading-tight">
+        Build the Future <br />
+        <span class="text-gradient">at {event.name}</span>
+      </h1>
+    </FadeIn>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-      <a href={event.registrationUrl} class="btn-primary w-full sm:w-auto">Register Now</a>
-      <a href="/schedule" class="btn-secondary w-full sm:w-auto">View Schedule</a>
-    </div>
+    <FadeIn variant="up" delay={450}>
+      <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-12 font-medium">
+        {event.description}
+      </p>
+    </FadeIn>
 
-    <CountdownTimer client:load targetDate={event.countdownDate} />
+    <FadeIn variant="up" delay={600}>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        <a href={event.registrationUrl} class="btn-primary w-full sm:w-auto">Register Now</a>
+        <a href="/schedule" class="btn-secondary w-full sm:w-auto">View Schedule</a>
+      </div>
+    </FadeIn>
+
+    <FadeIn variant="up" delay={800}>
+      <CountdownTimer client:load targetDate={event.countdownDate} />
+    </FadeIn>
   </div>
 </section>
