@@ -11,7 +11,7 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 transition-transform duration-300" transition:name="navbar">
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 transition-transform duration-300" transition:name="navbar">
   <div class="container-custom h-20 flex items-center justify-between">
     <a href="/" class="flex items-center gap-3 group">
       <img src="/lumbinix logo.png" alt="LumbiniX Logo" class="h-12 w-auto group-hover:scale-105 transition-transform duration-300" />
@@ -33,3 +33,46 @@ const navItems = [
   </div>
 </header>
 <div class="h-20"></div>
+
+<script>
+  function initNavbar() {
+    const header = document.getElementById('navbar');
+    if (!header) return;
+
+    let lastScroll = window.scrollY;
+    let ticking = false;
+
+    const onScroll = () => {
+      const current = window.scrollY;
+      if (current > lastScroll && current > 80) {
+        header.style.transform = 'translateY(-100%)';
+      } else {
+        header.style.transform = 'translateY(0)';
+      }
+      lastScroll = current;
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(onScroll);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    const path = window.location.pathname;
+    header.querySelectorAll('nav a').forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href && href !== '#' && path.startsWith(href)) {
+        link.classList.add('text-primary', 'after:w-full');
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavbar);
+  } else {
+    initNavbar();
+  }
+  document.addEventListener('astro:after-swap', initNavbar);
+</script>

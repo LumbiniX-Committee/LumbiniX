@@ -13,8 +13,8 @@ const { event } = Astro.props;
 <section class="relative pt-20 pb-32 overflow-hidden">
   <!-- Decorative Elements -->
   <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full -z-10">
-    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-[120px]"></div>
-    <div class="absolute bottom-0 right-10 w-72 h-72 bg-accent/20 rounded-full blur-[120px]"></div>
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-[120px] parallax-circle" data-parallax-speed="-0.08"></div>
+    <div class="absolute bottom-0 right-10 w-72 h-72 bg-accent/20 rounded-full blur-[120px] parallax-circle" data-parallax-speed="0.12"></div>
   </div>
 
   <div class="container-custom text-center">
@@ -63,3 +63,23 @@ const { event } = Astro.props;
     </FadeIn>
   </div>
 </section>
+
+<script>
+  const circles = document.querySelectorAll('.parallax-circle');
+  if (circles.length > 0 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const scrollY = window.scrollY;
+          circles.forEach((el) => {
+            const speed = parseFloat(el.getAttribute('data-parallax-speed') || '0');
+            el.style.transform = `translateY(${scrollY * speed}px)`;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+</script>

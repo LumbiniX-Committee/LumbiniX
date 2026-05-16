@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface CountdownTimerProps {
   targetDate: string;
@@ -10,6 +10,14 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
     hours: 0,
     minutes: 0,
     seconds: 0,
+  });
+
+  const prevRef = useRef(timeLeft);
+  const [flipState, setFlipState] = useState({
+    days: false,
+    hours: false,
+    minutes: false,
+    seconds: false,
   });
 
   useEffect(() => {
@@ -33,16 +41,40 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
     return () => clearInterval(timer);
   }, [targetDate]);
 
+  useEffect(() => {
+    const prev = prevRef.current;
+    const changed = {
+      days: prev.days !== timeLeft.days,
+      hours: prev.hours !== timeLeft.hours,
+      minutes: prev.minutes !== timeLeft.minutes,
+      seconds: prev.seconds !== timeLeft.seconds,
+    };
+
+    if (changed.days || changed.hours || changed.minutes || changed.seconds) {
+      setFlipState(changed);
+      const t = setTimeout(
+        () => setFlipState({ days: false, hours: false, minutes: false, seconds: false }),
+        400
+      );
+      prevRef.current = timeLeft;
+      return () => clearTimeout(t);
+    }
+
+    prevRef.current = timeLeft;
+  }, [timeLeft]);
+
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-2xl mx-auto">
       {[
-        { label: 'Days', value: timeLeft.days },
-        { label: 'Hours', value: timeLeft.hours },
-        { label: 'Minutes', value: timeLeft.minutes },
-        { label: 'Seconds', value: timeLeft.seconds },
+        { label: 'Days', key: 'days' as const, value: timeLeft.days },
+        { label: 'Hours', key: 'hours' as const, value: timeLeft.hours },
+        { label: 'Minutes', key: 'minutes' as const, value: timeLeft.minutes },
+        { label: 'Seconds', key: 'seconds' as const, value: timeLeft.seconds },
       ].map((item) => (
         <div key={item.label} className="glass-card p-4 sm:p-6 flex flex-col items-center bg-white/90 border-slate-100 shadow-lg shadow-primary/5">
-          <span className="text-3xl sm:text-5xl font-display font-bold text-primary">
+          <span
+            className={`text-3xl sm:text-5xl font-display font-bold text-primary countdown-value ${flipState[item.key] ? 'flip' : ''}`}
+          >
             {String(item.value).padStart(2, '0')}
           </span>
           <span className="text-xs sm:text-sm uppercase tracking-widest text-slate-500 font-bold mt-2">
