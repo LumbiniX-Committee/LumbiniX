@@ -34,5 +34,99 @@ const { title, description } = Astro.props;
     <div class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent"></div>
     
     <slot />
+
+    <script>
+      function isInsideGradientText(node: Node): boolean {
+        let parent = node.parentNode;
+        while (parent && parent !== document.body) {
+          if (parent instanceof HTMLElement && (
+            parent.classList.contains('text-gradient') || 
+            parent.classList.contains('gradient-text') ||
+            parent.classList.contains('bg-clip-text')
+          )) {
+            return true;
+          }
+          parent = parent.parentNode;
+        }
+        return false;
+      }
+
+      function initIDots() {
+        const sections = document.querySelectorAll('section');
+        
+        // Setup intersection observer to trigger section animations on scroll
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+              // Unobserve once triggered to only animate once
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.1, // Trigger when 10% of the section is visible
+          rootMargin: '0px 0px -50px 0px' // Slightly offset bottom margin for better visibility flow
+        });
+
+        sections.forEach((section) => {
+          // Find the main heading in this section to apply the bouncing dot
+          const heading = section.querySelector('h1, h2, .animate-i-dots');
+          if (heading && !(heading as HTMLElement).dataset.iDotsProcessed) {
+            (heading as HTMLElement).dataset.iDotsProcessed = 'true';
+            
+            const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+            const textNodes: Text[] = [];
+            let node;
+            while (node = walker.nextNode()) {
+              textNodes.push(node as Text);
+            }
+            
+            let hasAnimatedOne = false;
+            
+            for (const textNode of textNodes) {
+              const text = textNode.nodeValue || '';
+              
+              // Only animate the very first lowercase 'i' we find in the heading text nodes
+              if (!hasAnimatedOne && text.includes('i') && !text.includes('ı')) {
+                const fragment = document.createDocumentFragment();
+                const firstIndex = text.indexOf('i');
+                
+                if (firstIndex > 0) {
+                  fragment.appendChild(document.createTextNode(text.substring(0, firstIndex)));
+                }
+                
+                const wrapper = document.createElement('span');
+                wrapper.className = 'i-dot-wrapper';
+                wrapper.textContent = 'ı';
+                
+                const dot = document.createElement('span');
+                dot.className = 'i-dot';
+                dot.textContent = '.';
+                dot.style.setProperty('--dot-delay', '0.6s');
+                
+                wrapper.appendChild(dot);
+                fragment.appendChild(wrapper);
+                
+                if (firstIndex + 1 < text.length) {
+                  fragment.appendChild(document.createTextNode(text.substring(firstIndex + 1)));
+                }
+                
+                if (textNode.parentNode) {
+                  textNode.parentNode.replaceChild(fragment, textNode);
+                }
+                
+                hasAnimatedOne = true;
+                break;
+              }
+            }
+          }
+
+          observer.observe(section);
+        });
+      }
+
+      // Execute on page load
+      initIDots();
+    </script>
   </body>
 </html>

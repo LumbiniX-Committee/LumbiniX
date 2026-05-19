@@ -1,11 +1,31 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroComingSoon from "../features/coming-soon/HeroComingSoon.astro";
+import Navbar from "../features/navbar/Navbar.astro";
+import Footer from "../features/footer/Footer.astro";
+import Hero from "../features/hero/Hero.astro";
+import { eventMeta } from "../data/event";
+
+// Control flag: set to true to show Coming Soon landing page, false to show full index experience
+const SHOW_COMING_SOON = true;
 ---
 
-<BaseLayout
-  title="LUMBINIX | Coming Soon"
-  description="LumbiniX — Something is coming. A new era of innovation is about to begin."
->
-  <HeroComingSoon />
-</BaseLayout>
+{SHOW_COMING_SOON ? (
+  <BaseLayout
+    title="LUMBINIX | Coming Soon"
+    description="LumbiniX | Something is coming. A new era of innovation is about to begin."
+  >
+    <HeroComingSoon />
+  </BaseLayout>
+) : (
+  <BaseLayout
+    title={`${eventMeta.name} | Where Spirituality Meets Innovation`}
+    description="LumbiniX | Join developers, designers, and innovators for a 48-hour challenge to build the future of sustainable tech in Lumbini."
+  >
+    <Navbar />
+    <main>
+      <Hero event={eventMeta} />
+    </main>
+    <Footer />
+  </BaseLayout>
+)}
