@@ -1,0 +1,70 @@
+---
+// src/components/SEO.astro
+import { siteConfig } from '../data/seo'
+import type { PageSEO } from '../types/seo'
+
+interface Props {
+  seo: PageSEO
+  schema?: Array<Record<string, any>>
+}
+
+const { seo, schema = [] } = Astro.props
+const canonicalURL = new URL(seo.canonical === '/' ? '' : seo.canonical, siteConfig.siteUrl).href
+const ogImage = seo.ogImage || siteConfig.defaultImage
+const fullImageURL = new URL(ogImage, siteConfig.siteUrl).href
+
+// Build keywords string
+const keywordsString = seo.keywords.join(', ')
+---
+
+<!-- Primary Meta Tags -->
+<title>{seo.title}</title>
+<meta name="title" content={seo.title} />
+<meta name="description" content={seo.description} />
+<meta name="keywords" content={keywordsString} />
+<meta name="author" content={siteConfig.author} />
+<meta name="robots" content={`${seo.noindex ? 'noindex' : 'index'},${seo.nofollow ? 'nofollow' : 'follow'}`} />
+<meta name="googlebot" content={`${seo.noindex ? 'noindex' : 'index'},${seo.nofollow ? 'nofollow' : 'follow'}`} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={seo.ogType} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={seo.title} />
+<meta property="og:description" content={seo.description} />
+<meta property="og:image" content={fullImageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content={siteConfig.siteName} />
+<meta property="og:locale" content={siteConfig.locale} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={seo.title} />
+<meta name="twitter:description" content={seo.description} />
+<meta name="twitter:image" content={fullImageURL} />
+<meta name="twitter:site" content={siteConfig.twitterHandle} />
+<meta name="twitter:creator" content={siteConfig.twitterHandle} />
+
+<!-- Additional Meta Tags -->
+<meta name="theme-color" content={siteConfig.themeColor} />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<!-- Geo Tags (for local SEO) -->
+<meta name="geo.region" content="NP-P5" />
+<meta name="geo.placename" content="Lumbini" />
+<meta name="geo.position" content="27.4833;83.2764" />
+<meta name="ICBM" content="27.4833, 83.2764" />
+
+<!-- JSON-LD Schema Markup -->
+{schema.map((schemaItem) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schemaItem)} />
+))}
+
+<!-- Preconnect to external domains for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

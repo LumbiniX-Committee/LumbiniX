@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Crawl-delay for polite bots
+Crawl-delay: 1
+
+# Sitemap locations
+Sitemap: https://lumbinix.com/sitemap-index.xml
+Sitemap: https://lumbinix.com/sitemap.xml

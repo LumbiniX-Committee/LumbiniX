@@ -5,22 +5,24 @@ import Navbar from "../features/navbar/Navbar.astro";
 import Footer from "../features/footer/Footer.astro";
 import Hero from "../features/hero/Hero.astro";
 import { eventMeta } from "../data/event";
+import { organizationSchema, eventSchema } from "../data/schema";
 
 // Control flag: set to true to show Coming Soon landing page, false to show full index experience
 const SHOW_COMING_SOON = true;
+const schemas = [organizationSchema, eventSchema];
 ---
 
 {SHOW_COMING_SOON ? (
   <BaseLayout
-    title="LUMBINIX | Coming Soon"
-    description="LumbiniX | Something is coming. A new era of innovation is about to begin."
+    pageKey="coming-soon"
+    schema={schemas}
   >
     <HeroComingSoon />
   </BaseLayout>
 ) : (
   <BaseLayout
-    title={`${eventMeta.name} | Where Spirituality Meets Innovation`}
-    description="LumbiniX | Join developers, designers, and innovators for a 48-hour challenge to build the future of sustainable tech in Lumbini."
+    pageKey="home"
+    schema={schemas}
   >
     <Navbar />
     <main>

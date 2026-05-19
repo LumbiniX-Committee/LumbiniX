@@ -3,12 +3,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../features/navbar/Navbar.astro";
 import Schedule from "../features/schedule/Schedule.astro";
 import Footer from "../features/footer/Footer.astro";
-import { eventMeta } from "../data/event";
+import { organizationSchema, generateBreadcrumbSchema } from "../data/schema";
+import { breadcrumbs } from "../data/seo";
+
+const schemas = [
+  organizationSchema,
+  generateBreadcrumbSchema(breadcrumbs.schedule)
+];
 ---
 
 <BaseLayout
-  title={`Schedule | ${eventMeta.name}`}
-  description="LumbiniX registration timeline, online program, main on-site schedule (Shrawan 22–24), and team selection guidelines."
+  pageKey="schedule"
+  schema={schemas}
 >
   <Navbar />
   <main class="pt-12">

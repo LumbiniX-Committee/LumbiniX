@@ -4,12 +4,19 @@ import Navbar from "../features/navbar/Navbar.astro";
 import FAQ from "../features/faq/FAQ.astro";
 import Footer from "../features/footer/Footer.astro";
 import { faqs } from "../data/faqs";
-import { eventMeta } from "../data/event";
+import { organizationSchema, faqSchema, generateBreadcrumbSchema } from "../data/schema";
+import { breadcrumbs } from "../data/seo";
+
+const schemas = [
+  organizationSchema,
+  faqSchema,
+  generateBreadcrumbSchema(breadcrumbs.faq)
+];
 ---
 
 <BaseLayout 
-  title={`FAQ | ${eventMeta.name}`} 
-  description="Find answers to common questions about participation, teams, and logistics for LumbiniX 2026."
+  pageKey="faq"
+  schema={schemas}
 >
   <Navbar />
   <main class="pt-12">

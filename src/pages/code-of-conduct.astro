@@ -4,12 +4,18 @@ import Navbar from "../features/navbar/Navbar.astro";
 import Footer from "../features/footer/Footer.astro";
 import CodeOfConduct from "../features/code-of-conduct/CodeOfConduct.astro";
 import { codeOfConductSections } from "../data/codeOfConduct";
-import { eventMeta } from "../data/event";
+import { organizationSchema, generateBreadcrumbSchema } from "../data/schema";
+import { breadcrumbs } from "../data/seo";
+
+const schemas = [
+  organizationSchema,
+  generateBreadcrumbSchema(breadcrumbs['code-of-conduct'])
+];
 ---
 
 <BaseLayout
-  title={`Code of conduct | ${eventMeta.name}`}
-  description="LumbiniX hackathon rules: respect, venue, teams, AI assistance, judges, safety, disqualification, reporting, and participant agreement."
+  pageKey="code-of-conduct"
+  schema={schemas}
 >
   <Navbar />
   <main class="pt-12">

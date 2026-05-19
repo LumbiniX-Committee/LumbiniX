@@ -4,12 +4,18 @@ import Navbar from "../features/navbar/Navbar.astro";
 import Team from "../features/team/Team.astro";
 import Footer from "../features/footer/Footer.astro";
 import { eventLeads, organizingCommittee } from "../data/teamMembers";
-import { eventMeta } from "../data/event";
+import { organizationSchema, generateBreadcrumbSchema } from "../data/schema";
+import { breadcrumbs } from "../data/seo";
+
+const schemas = [
+  organizationSchema,
+  generateBreadcrumbSchema(breadcrumbs.team)
+];
 ---
 
 <BaseLayout
-  title={`Organizing Team | ${eventMeta.name}`}
-  description="Meet the Lumbini City College student organizing committee behind LumbiniX, featuring event leads, roles, and team."
+  pageKey="team"
+  schema={schemas}
 >
   <Navbar />
   <main class="pt-12">

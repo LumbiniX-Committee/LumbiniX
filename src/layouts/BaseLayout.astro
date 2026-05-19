@@ -1,12 +1,34 @@
 ---
 import "../styles/global.css";
+import SEO from "../components/SEO.astro";
+import { pageSEO } from "../data/seo";
+import type { PageSEO } from "../types/seo";
 
 interface Props {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
+  pageKey?: string;
+  schema?: Array<Record<string, any>>;
 }
 
-const { title, description } = Astro.props;
+const { title, description, pageKey, schema = [] } = Astro.props;
+
+// Resolve SEO object
+let seo: PageSEO;
+if (pageKey && pageSEO[pageKey]) {
+  seo = { ...pageSEO[pageKey] };
+  if (title) seo.title = title;
+  if (description) seo.description = description;
+} else {
+  // Build fallback page-specific SEO
+  seo = {
+    title: title || "LumbiniX Hackathon 2026 | Nepal's Premier Tech Event",
+    description: description || "Join LumbiniX Hackathon 2026 in Lumbini, Nepal. A premier technology event bringing together students, developers, and innovators.",
+    keywords: ['LumbiniX Hackathon', 'Nepal tech hackathon', 'student hackathon Nepal'],
+    canonical: Astro.url.pathname,
+    ogType: 'website'
+  };
+}
 ---
 
 <!DOCTYPE html>
@@ -16,17 +38,8 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content={description} />
     
-    <!-- Meta Tags -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="/lumbinix logo.png" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <SEO seo={seo} schema={schema} />
   </head>
   <body class="bg-bg text-slate-800">
     <!-- Subtle Background Glow -->

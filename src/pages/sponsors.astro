@@ -4,12 +4,18 @@ import Navbar from "../features/navbar/Navbar.astro";
 import Sponsors from "../features/sponsors/Sponsors.astro";
 import Footer from "../features/footer/Footer.astro";
 import { sponsors } from "../data/sponsors";
-import { eventMeta } from "../data/event";
+import { organizationSchema, generateBreadcrumbSchema } from "../data/schema";
+import { breadcrumbs } from "../data/seo";
+
+const schemas = [
+  organizationSchema,
+  generateBreadcrumbSchema(breadcrumbs.sponsors)
+];
 ---
 
 <BaseLayout 
-  title={`Sponsors | ${eventMeta.name}`} 
-  description="Meet the organizations making LumbiniX 2026 possible through their generous support."
+  pageKey="sponsors"
+  schema={schemas}
 >
   <Navbar />
   <main class="pt-12">

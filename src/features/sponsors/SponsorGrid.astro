@@ -36,6 +36,7 @@ const groupedSponsors = sponsors.reduce((acc, sponsor) => {
             target="_blank" 
             rel="noopener noreferrer"
             class="glass-card p-6 h-full flex items-center justify-center group hover:border-primary/40 transition-all shadow-sm hover:shadow-md bg-white/50"
+            aria-label={`Visit ${sponsor.name} website`}
           >
             <img 
               src={sponsor.logo} 
