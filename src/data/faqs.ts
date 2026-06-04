@@ -11,7 +11,7 @@ export const faqs: FAQ[] = [
   },
   {
     question: "Is there a registration fee?",
-    answer: "No, participation in LumbiniX Hackathon is completely free! We even provide meals, snacks, and some cool swag.",
+    answer: "Registration is completely free! If your team is selected among the top 10 teams to participate in the main event, we provide meals, accommodation, and resources throughout the 3-day hackathon.",
   },
   {
     question: "What should I bring?",

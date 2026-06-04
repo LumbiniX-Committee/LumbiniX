@@ -3,12 +3,22 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroComingSoon from "../features/coming-soon/HeroComingSoon.astro";
 import Navbar from "../features/navbar/Navbar.astro";
 import Footer from "../features/footer/Footer.astro";
-import Hero from "../features/hero/Hero.astro";
+import HeroEnhanced from "../features/hero/HeroEnhanced.astro";
+import StatsEnhanced from "../features/landing/StatsEnhanced.astro";
+import AboutEnhanced from "../features/landing/AboutEnhanced.astro";
+import EligibilityEnhanced from "../features/landing/EligibilityEnhanced.astro";
+import Prizes from "../features/prizes/Prizes.astro";
+import Team from "../features/team/Team.astro";
+import Sponsors from "../features/sponsors/Sponsors.astro";
+import FAQ from "../features/faq/FAQ.astro";
 import { eventMeta } from "../data/event";
 import { organizationSchema, eventSchema } from "../data/schema";
+import { eventLeads, organizingCommittee, volunteers } from "../data/teamMembers";
+import { sponsors } from "../data/sponsors";
+import { faqs } from "../data/faqs";
 
 // Control flag: set to true to show Coming Soon landing page, false to show full index experience
-const SHOW_COMING_SOON = true;
+const SHOW_COMING_SOON = false;
 const schemas = [organizationSchema, eventSchema];
 ---
 
@@ -26,7 +36,14 @@ const schemas = [organizationSchema, eventSchema];
   >
     <Navbar />
     <main>
-      <Hero event={eventMeta} />
+      <HeroEnhanced event={eventMeta} />
+      <StatsEnhanced />
+      <AboutEnhanced />
+      <EligibilityEnhanced />
+      <Prizes />
+      <Team eventLeads={eventLeads} committee={organizingCommittee} volunteers={volunteers} />
+      <Sponsors sponsors={sponsors} />
+      <FAQ faqs={faqs} />
     </main>
     <Footer />
   </BaseLayout>

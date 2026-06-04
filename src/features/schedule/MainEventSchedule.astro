@@ -8,14 +8,14 @@ interface Props {
 const { days } = Astro.props;
 ---
 
-<section id="main-event-schedule" class="py-24">
+<section id="main-event-schedule" class="py-24 bg-white dark:bg-dark-bg transition-colors duration-300">
   <div class="container-custom">
     <div class="text-center mb-16 max-w-3xl mx-auto">
-      <p class="text-primary font-semibold text-sm uppercase tracking-widest mb-3">On-site</p>
-      <h2 class="text-4xl md:text-5xl mb-4 font-display font-bold text-slate-900">
+      <p class="text-primary dark:text-primary-light font-semibold text-sm uppercase tracking-widest mb-3">On-site</p>
+      <h2 class="text-4xl md:text-5xl mb-4 font-display font-bold text-slate-900 dark:text-white">
         Main event <span class="text-gradient">schedule</span>
       </h2>
-      <p class="text-slate-600 leading-relaxed">
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
         Three days on the ground at LumbiniX (Shrawan 22–24, 2083 BS), featuring kickoff and sprinting, a full
         build day, then submission, demos, and awards.
       </p>
@@ -24,25 +24,25 @@ const { days } = Astro.props;
     <div class="max-w-4xl mx-auto space-y-14">
       {days.map((day) => (
         <div class="scroll-mt-24" key={day.bsDay}>
-          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6 border-b border-slate-200 pb-4">
-            <h3 class="text-2xl font-display text-slate-900">{day.dayTitle}</h3>
-            <p class="text-sm font-semibold text-primary">{day.bsDay}</p>
+          <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6 border-b border-slate-200 dark:border-dark-border pb-4">
+            <h3 class="text-2xl font-display text-slate-900 dark:text-white">{day.dayTitle}</h3>
+            <p class="text-sm font-semibold text-primary dark:text-primary-light">{day.bsDay}</p>
           </div>
-          <div class="overflow-x-auto rounded-2xl border border-slate-200 bg-white/80 shadow-sm">
+          <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-dark-border bg-white/80 dark:bg-dark-card/80 shadow-sm dark:shadow-dark-border/10">
             <table class="w-full min-w-[320px] text-left text-sm">
               <thead>
-                <tr class="border-b border-slate-200 bg-slate-50/80">
-                  <th class="py-3 px-4 font-display text-slate-900 w-[40%] sm:w-[36%]">Time</th>
-                  <th class="py-3 px-4 font-display text-slate-900">Activity</th>
+                <tr class="border-b border-slate-200 dark:border-dark-border bg-slate-50/80 dark:bg-dark-surface/80">
+                  <th class="py-3 px-4 font-display text-slate-900 dark:text-white w-[40%] sm:w-[36%]">Time</th>
+                  <th class="py-3 px-4 font-display text-slate-900 dark:text-white">Activity</th>
                 </tr>
               </thead>
               <tbody>
                 {day.rows.map((row) => (
-                  <tr class="border-b border-slate-100 last:border-0 hover:bg-primary/[0.03] transition-colors">
-                    <td class="py-3 px-4 text-slate-700 font-medium tabular-nums align-top whitespace-nowrap">
+                  <tr class="border-b border-slate-100 dark:border-dark-border/50 last:border-0 hover:bg-primary/[0.03] dark:hover:bg-primary/[0.08] transition-colors">
+                    <td class="py-3 px-4 text-slate-700 dark:text-slate-300 font-medium tabular-nums align-top whitespace-nowrap">
                       {row.time}
                     </td>
-                    <td class="py-3 px-4 text-slate-600 align-top">{row.activity}</td>
+                    <td class="py-3 px-4 text-slate-600 dark:text-slate-400 align-top">{row.activity}</td>
                   </tr>
                 ))}
               </tbody>

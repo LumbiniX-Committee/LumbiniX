@@ -5,21 +5,25 @@ import TeamMemberShowcaseCard from "./TeamMemberShowcaseCard.astro";
 interface Props {
   eventLeads: TeamMemberProfile[];
   committee: TeamMemberProfile[];
+  volunteers?: TeamMemberProfile[];
 }
 
-const { eventLeads, committee } = Astro.props;
+const { eventLeads, committee, volunteers = [] } = Astro.props;
 ---
 
-<section id="team" class="py-24">
+<section id="team" class="py-24 bg-white dark:bg-dark-bg transition-colors duration-300">
   <div class="container-custom">
     <div class="max-w-3xl mx-auto text-center mb-14 md:mb-16">
-      <p class="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Organizing team</p>
-      <h2 class="text-4xl md:text-5xl mb-4 font-display font-bold text-slate-900">
-        Meet the minds behind <span class="text-gradient">LumbiniX</span>
+      <p class="text-primary dark:text-primary-light font-semibold text-sm uppercase tracking-widest mb-3">Organizing team</p>
+      <h2 class="text-4xl md:text-5xl mb-4 font-display font-bold text-slate-900 dark:text-white">
+        Meet the m<span class="text-gradient">i</span>nds beh<span class="text-gradient">i</span>nd <span class="text-gradient">LumbiniX</span>
       </h2>
-      <p class="text-slate-600 leading-relaxed text-base md:text-lg">
-        Students from <span class="font-semibold text-slate-800">Lumbini City College</span>, representing diverse
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base md:text-lg">
+        Students from <span class="font-semibold text-slate-800 dark:text-white">Lumbini City College</span>, representing diverse
         roles, one mission: run an unforgettable hackathon where spirituality meets innovation.
+      </p>
+      <p class="text-slate-500 dark:text-slate-400 text-sm mt-4">
+        Total team: <span class="font-semibold text-primary dark:text-primary-light">15 members</span> (10 organizing + 5 volunteers)
       </p>
     </div>
 
@@ -35,8 +39,26 @@ const { eventLeads, committee } = Astro.props;
       ))}
     </div>
 
-    <p class="text-center text-slate-400 text-sm mt-12 max-w-xl mx-auto">
-      X links are placeholders until official handles are added in the team data file.
+    {volunteers.length > 0 && (
+      <div class="mt-16">
+        <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white text-center mb-8">
+          <span class="text-gradient">Volunteers</span>
+        </h3>
+        <div class="glass-card p-8 max-w-3xl mx-auto text-center">
+          <div class="text-5xl mb-4">🙋‍♂️🙋‍♀️</div>
+          <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-3">5 Volunteer Positions</h4>
+          <p class="text-slate-600 dark:text-slate-400 mb-4">
+            Announcement coming soon! We're looking for 5 dedicated volunteers to join our team.
+          </p>
+          <p class="text-primary dark:text-primary-light font-semibold">
+            Stay tuned for application details.
+          </p>
+        </div>
+      </div>
+    )}
+
+    <p class="text-center text-slate-400 dark:text-slate-500 text-sm mt-12 max-w-xl mx-auto">
+      More team members will be announced soon.
     </p>
   </div>
 </section>
