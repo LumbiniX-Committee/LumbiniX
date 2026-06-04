@@ -7,26 +7,37 @@ interface Props {
 }
 
 const { sponsors } = Astro.props;
+const hasSponsors = sponsors.length > 0;
 ---
 
-<section id="sponsors" class="py-24 overflow-hidden relative">
+<section id="sponsors" class="py-24 overflow-hidden relative bg-slate-50 dark:bg-dark-surface transition-colors duration-300">
   <!-- Background Glow -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary/5 rounded-full blur-[120px] -z-10"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary/5 dark:bg-primary/10 rounded-full blur-[120px] -z-10"></div>
 
   <div class="container-custom">
     <div class="text-center mb-20">
-      <h2 class="text-4xl md:text-5xl mb-4">Our <span class="text-gradient">Partners</span></h2>
-      <p class="text-slate-400 max-w-2xl mx-auto">
-        Empowering the next generation of innovators. Supported by the world's leading technology companies.
+      <h2 class="text-4xl md:text-5xl mb-4 text-slate-900 dark:text-white">Our <span class="text-gradient">Partners</span></h2>
+      <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
+        Empowering the next generation of innovators. Supported by industry-leading technology companies.
       </p>
     </div>
 
-    <SponsorGrid sponsors={sponsors} />
+    {hasSponsors ? (
+      <SponsorGrid sponsors={sponsors} />
+    ) : (
+      <div class="glass-card p-16 text-center max-w-3xl mx-auto mb-12 animate-pulse-glow">
+        <div class="text-6xl mb-6 animate-float">🤝</div>
+        <h3 class="text-3xl font-bold mb-4 text-slate-900 dark:text-white">Partners <span class="text-gradient">Coming Soon</span></h3>
+        <p class="text-slate-500 dark:text-slate-400 text-lg">
+          We're finalizing partnerships with amazing companies. Big announcements dropping soon!
+        </p>
+      </div>
+    )}
 
-    <div class="mt-24 glass-card p-12 text-center max-w-4xl mx-auto">
-      <h3 class="text-2xl mb-4">Interested in Sponsoring?</h3>
-      <p class="text-slate-400 mb-8">Join us in making LumbiniX 2026 the best hackathon yet. Get in touch for our sponsorship prospectus.</p>
-      <a href="mailto:sponsors@lumbinix.tech" class="btn-secondary">Become a Partner</a>
+    <div class="mt-16 glass-card p-12 text-center max-w-4xl mx-auto group hover:border-primary/30 transition-all duration-300">
+      <h3 class="text-2xl mb-4 text-slate-900 dark:text-white">Interested in Sponsor<span class="text-gradient">i</span>ng?</h3>
+      <p class="text-slate-500 dark:text-slate-400 mb-8">Join us in making LumbiniX 2026 the best hackathon yet. Get in touch for our sponsorship prospectus.</p>
+      <a href="mailto:sponsors@lumbinix.tech" class="btn-secondary inline-block hover:scale-105 transition-transform">Become a Partner</a>
     </div>
   </div>
 </section>

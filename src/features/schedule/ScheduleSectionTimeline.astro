@@ -16,18 +16,18 @@ const { id, eyebrow, titleLead, titleGradient, description, milestones, variant 
 
 const bg =
   variant === "alt"
-    ? "py-24 bg-bg-alt/50 border-y border-slate-100"
-    : "py-24";
+    ? "py-24 bg-bg-alt/50 dark:bg-dark-surface border-y border-slate-100 dark:border-dark-border transition-colors duration-300"
+    : "py-24 bg-white dark:bg-dark-bg transition-colors duration-300";
 ---
 
 <section id={id} class={bg}>
   <div class="container-custom">
     <div class="max-w-3xl mx-auto text-center mb-16">
-      <p class="text-primary font-semibold text-sm uppercase tracking-widest mb-3">{eyebrow}</p>
-      <h2 class="text-4xl md:text-5xl mb-4 font-display font-bold text-slate-900">
+      <p class="text-primary dark:text-primary-light font-semibold text-sm uppercase tracking-widest mb-3">{eyebrow}</p>
+      <h2 class="text-4xl md:text-5xl mb-4 font-display font-bold text-slate-900 dark:text-white">
         {titleLead} <span class="text-gradient">{titleGradient}</span>
       </h2>
-      <p class="text-slate-600 leading-relaxed">
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
         {description}
       </p>
     </div>
@@ -35,24 +35,24 @@ const bg =
     <div class="max-w-2xl mx-auto">
       <ol class="relative">
         {milestones.map((m, i) => (
-          <li class="relative pl-11 sm:pl-14 pb-12 last:pb-0">
+          <li class="relative pl-11 sm:pl-14 pb-12 last:pb-0 group">
             {i < milestones.length - 1 && (
               <span
-                class="absolute left-[15px] sm:left-[19px] top-5 bottom-0 w-px bg-slate-200"
+                class="absolute left-[15px] sm:left-[19px] top-5 bottom-0 w-px bg-slate-200 dark:bg-dark-border"
                 aria-hidden="true"
               />
             )}
             <span
-              class="absolute left-0 top-1.5 w-8 h-8 sm:w-10 sm:h-10 rounded-full border-4 border-white bg-primary shadow-md ring-2 ring-primary/15"
+              class="absolute left-0 top-1.5 w-8 h-8 sm:w-10 sm:h-10 rounded-full border-4 border-white dark:border-dark-card bg-primary shadow-md ring-2 ring-primary/15 dark:ring-primary/30 group-hover:scale-110 transition-transform"
               aria-hidden="true"
             />
-            <article class="glass-card p-6 sm:p-7 text-left">
+            <article class="glass-card p-6 sm:p-7 text-left group-hover:border-primary/30 transition-all duration-300 hover:-translate-y-0.5">
               <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-3">
-                <span class="text-xs font-bold uppercase tracking-wide text-primary">{m.bsDate}</span>
-                <span class="text-sm font-semibold text-slate-700 tabular-nums">{m.time}</span>
+                <span class="text-xs font-bold uppercase tracking-wide text-primary dark:text-primary-light">{m.bsDate}</span>
+                <span class="text-sm font-semibold text-slate-700 dark:text-slate-300 tabular-nums">{m.time}</span>
               </div>
-              <h3 class="text-xl font-display text-slate-900 mb-2">{m.title}</h3>
-              <p class="text-slate-600 text-sm leading-relaxed">{m.description}</p>
+              <h3 class="text-xl font-display text-slate-900 dark:text-white mb-2">{m.title}</h3>
+              <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{m.description}</p>
             </article>
           </li>
         ))}

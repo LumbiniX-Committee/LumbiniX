@@ -78,34 +78,60 @@ export const organizingCommittee: TeamMemberProfile[] = [
     "raunak.jpeg",
     "https://www.linkedin.com/in/raunak-amatya-241102335/"
   ),
-  member(
-    "Ganesh Prasad Bhandari",
-    "Documentation & Finance Manager",
-    "ganesh-prasad-bhandari",
-    "Ganeshprasadbhandari.jpeg",
-    "https://www.linkedin.com/in/ganesh-prasad-bhandari-b54a34323/"
-  ),
-  member(
-    "Aayush Poudel",
-    "Tech Lead",
-    "aayush-poudel",
-    "Aayushpoudel.jpeg",
-    "https://www.linkedin.com/in/aayushpoudel1/"
-  ),
-  member("Bibek Bhusal", "Tech Lead", "bibek-bhusal"),
-  member(
-    "Suhan Shrestha",
-    "Content Lead",
-    "suhan-shrestha",
-    "suhan.jpeg",
-    "https://www.linkedin.com/in/suhan-shrestha-9223b1247/"
-  ),
-  member("Samyam Khanal", "Host / MC", "samyam-khanal", "samyamkhanal.jpg"),
-  member("Smarika Gyawali", "Host / MC", "smarika-gyawali"),
   {
-    name: "Volunteer team",
-    role: "Volunteers — 5 roles (applications opening soon)",
-    image: avatar("lumbinix-volunteers"),
-    ...socialDummy("volunteers"),
+    name: "Ishwor Bhattarai",
+    role: "Logistic Lead",
+    image: avatar("ishwor-bhattarai"),
+    twitterUrl: "",
+    linkedinUrl: "",
+  },
+  {
+    name: "Smarika Gyawali",
+    role: "Vice Logistic Lead",
+    image: "/smarika.jpg",
+    twitterUrl: "",
+    linkedinUrl: "",
   },
 ];
+
+// Volunteers - 5 positions (announcement coming soon)
+export const volunteers: TeamMemberProfile[] = [
+  {
+    name: "Volunteer 1",
+    role: "Volunteer",
+    image: avatar("volunteer-1"),
+    ...socialDummy("volunteer-1"),
+  },
+  {
+    name: "Volunteer 2",
+    role: "Volunteer",
+    image: avatar("volunteer-2"),
+    ...socialDummy("volunteer-2"),
+  },
+  {
+    name: "Volunteer 3",
+    role: "Volunteer",
+    image: avatar("volunteer-3"),
+    ...socialDummy("volunteer-3"),
+  },
+  {
+    name: "Volunteer 4",
+    role: "Volunteer",
+    image: avatar("volunteer-4"),
+    ...socialDummy("volunteer-4"),
+  },
+  {
+    name: "Volunteer 5",
+    role: "Volunteer",
+    image: avatar("volunteer-5"),
+    ...socialDummy("volunteer-5"),
+  },
+];
+
+// Hidden for now - will be announced soon
+// member("Ganesh Prasad Bhandari", "Documentation & Finance Manager", "ganesh-prasad-bhandari"),
+// member("Aayush Poudel", "Tech Lead", "aayush-poudel", "Aayushpoudel.jpeg"),
+// member("Bibek Bhusal", "Tech Lead", "bibek-bhusal"),
+// member("Suhan Shrestha", "Content Lead", "suhan-shrestha", "suhan.jpeg"),
+// member("Samyam Khanal", "Host / MC", "samyam-khanal", "samyamkhanal.jpg"),
+// member("Smarika Gyawali", "Host / MC", "smarika-gyawali");

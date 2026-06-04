@@ -38,8 +38,8 @@ export const trackAwards: TrackAward[] = [
 
 export const prizePoolGrandTotalNPR = 200_000;
 
-/** Partner tool access called out in copy (bracket style on the prizes page). */
-export const prizePartnerPerksBracket = "[Claude Pro (Anthropic), Canva Pro]";
+/** Suspense teaser for top 10 teams on prizes page. */
+export const top10TeamsTeaser = "🔥 Top 10 teams get [REDACTED]. Trust us—you're NOT ready for this.";
 
 export const prizeCeremonyNote =
   "All prizes are awarded at the closing ceremony on Day 3 in the main hall of Lumbini City College.";

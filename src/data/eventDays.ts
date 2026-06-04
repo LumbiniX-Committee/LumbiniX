@@ -19,8 +19,7 @@ export const eventScheduleDays: ScheduleDayBlock[] = [
     ],
   },
   {
-    dayTitle: "Day 2: Intensive development",
-    bsDay: "Shrawan 23, 2083 BS",
+    dayTitle: "Day 2: Intensive development", bsDay: "Shrawan 23, 2083 BS",
     rows: [
       { time: "7:00 – 8:00", activity: "Breakfast" },
       { time: "11:00 – 12:00", activity: "Lunch break" },
