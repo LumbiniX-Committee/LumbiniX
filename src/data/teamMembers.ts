@@ -4,31 +4,26 @@ function avatar(seed: string): string {
   return `https://i.pravatar.cc/512?u=${encodeURIComponent(seed)}`;
 }
 
-function socialDummy(slug: string): Pick<TeamMemberProfile, "twitterUrl" | "linkedinUrl"> {
-  return {
-    twitterUrl: `https://x.com/lumbinix_${slug}`,
-    linkedinUrl: `https://www.linkedin.com/in/lumbinix_${slug}`,
-  };
+interface MemberSocials {
+  instagramUrl?: string;
+  facebookUrl?: string;
+  linkedinUrl?: string;
 }
 
-/**
- * @param publicImage — filename in `public/` (e.g. `Ayush.png` → `/Ayush.png`)
- * @param linkedinUrl — optional real LinkedIn profile URL
- */
 function member(
   name: string,
   role: string,
   slug: string,
   publicImage?: string,
-  linkedinUrl?: string
+  socials?: MemberSocials
 ): TeamMemberProfile {
-  const social = socialDummy(slug);
   return {
     name,
     role,
     image: publicImage ? `/${publicImage}` : avatar(slug),
-    twitterUrl: social.twitterUrl,
-    linkedinUrl: linkedinUrl ?? social.linkedinUrl,
+    instagramUrl: socials?.instagramUrl,
+    facebookUrl: socials?.facebookUrl,
+    linkedinUrl: socials?.linkedinUrl,
   };
 }
 
@@ -38,14 +33,20 @@ export const eventLeads: TeamMemberProfile[] = [
     "Event Lead",
     "aayush-chapagain",
     "Ayush.png",
-    "https://www.linkedin.com/in/aayushchapagain/"
+    {
+      linkedinUrl: "https://www.linkedin.com/in/aayushchapagain/",
+      instagramUrl: "https://www.instagram.com/insta.aayushchapagain/",
+    }
   ),
   member(
     "Abishkar Dhenga",
     "Event Lead",
     "abishkar-dhenga",
     "Abishkardhenga.jpeg",
-    "https://www.linkedin.com/in/abishkar-dhenga/"
+    {
+      linkedinUrl: "https://www.linkedin.com/in/abishkar-dhenga/",
+      instagramUrl: "https://www.instagram.com/aabiskardhenga/",
+    }
   ),
 ];
 
@@ -55,77 +56,68 @@ export const organizingCommittee: TeamMemberProfile[] = [
     "Supervisor",
     "kalpit-nepal",
     "kalpit.jpeg",
-    "https://www.linkedin.com/in/kalpit-nepal-0086aa331/"
+    {
+      linkedinUrl: "https://www.linkedin.com/in/kalpit-nepal-0086aa331/",
+      instagramUrl: "https://www.instagram.com/kalpit_sarkarrr/",
+    }
   ),
   member(
     "Nishan Bhurtel",
     "Event Coordinator",
     "nishan-bhurtel",
     "Nishanbhurtel.png",
-    "https://www.linkedin.com/in/nishan-bhurtel-a726312b7/"
+    {
+      linkedinUrl: "https://www.linkedin.com/in/nishan-bhurtel-a726312b7/",
+      instagramUrl: "https://www.instagram.com/nishanbhurtel/",
+    }
   ),
   member(
     "Abhay Verma",
     "Graphic Designer Lead",
     "abhay-verma",
     "abhayverma.jpeg",
-    "https://www.linkedin.com/in/abhayverma22/"
+    {
+      linkedinUrl: "https://www.linkedin.com/in/abhayverma22/",
+      instagramUrl: "https://www.instagram.com/abhay_verma_22/",
+    }
   ),
   member(
     "Raunak Amatya",
     "Graphic Designer Lead",
     "raunak-amatya",
     "raunak.jpeg",
-    "https://www.linkedin.com/in/raunak-amatya-241102335/"
+    {
+      linkedinUrl: "https://www.linkedin.com/in/raunak-amatya-241102335/",
+      instagramUrl: "https://www.instagram.com/ra_un_ak_07/",
+    }
   ),
-  {
-    name: "Ishwor Bhattarai",
-    role: "Logistic Lead",
-    image: avatar("ishwor-bhattarai"),
-    twitterUrl: "",
-    linkedinUrl: "",
-  },
-  {
-    name: "Smarika Gyawali",
-    role: "Vice Logistic Lead",
-    image: "/smarika.jpg",
-    twitterUrl: "",
-    linkedinUrl: "",
-  },
+  member(
+    "Ishwor Neupane",
+    "Logistic Lead",
+    "ishwor-neupane",
+    "ishworsui.jpg",
+    {
+      instagramUrl: "https://www.instagram.com/ishwor_cr7/",
+    }
+  ),
+  member(
+    "Smarika Gyawali",
+    "Vice Logistic Lead",
+    "smarika-gyawali",
+    "smarika.jpg",
+    {
+      instagramUrl: "https://www.instagram.com/smarika_gyawali/",
+    }
+  ),
 ];
 
 // Volunteers - 5 positions (announcement coming soon)
 export const volunteers: TeamMemberProfile[] = [
-  {
-    name: "Volunteer 1",
-    role: "Volunteer",
-    image: avatar("volunteer-1"),
-    ...socialDummy("volunteer-1"),
-  },
-  {
-    name: "Volunteer 2",
-    role: "Volunteer",
-    image: avatar("volunteer-2"),
-    ...socialDummy("volunteer-2"),
-  },
-  {
-    name: "Volunteer 3",
-    role: "Volunteer",
-    image: avatar("volunteer-3"),
-    ...socialDummy("volunteer-3"),
-  },
-  {
-    name: "Volunteer 4",
-    role: "Volunteer",
-    image: avatar("volunteer-4"),
-    ...socialDummy("volunteer-4"),
-  },
-  {
-    name: "Volunteer 5",
-    role: "Volunteer",
-    image: avatar("volunteer-5"),
-    ...socialDummy("volunteer-5"),
-  },
+  member("Volunteer 1", "Volunteer", "volunteer-1"),
+  member("Volunteer 2", "Volunteer", "volunteer-2"),
+  member("Volunteer 3", "Volunteer", "volunteer-3"),
+  member("Volunteer 4", "Volunteer", "volunteer-4"),
+  member("Volunteer 5", "Volunteer", "volunteer-5"),
 ];
 
 // Hidden for now - will be announced soon

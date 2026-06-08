@@ -66,6 +66,7 @@ export interface TeamMemberProfile {
   name: string;
   role: string;
   image: string;
-  twitterUrl: string;
-  linkedinUrl: string;
+  instagramUrl?: string;
+  facebookUrl?: string;
+  linkedinUrl?: string;
 }

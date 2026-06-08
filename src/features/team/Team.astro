@@ -22,9 +22,6 @@ const { eventLeads, committee, volunteers = [] } = Astro.props;
         Students from <span class="font-semibold text-slate-800 dark:text-white">Lumbini City College</span>, representing diverse
         roles, one mission: run an unforgettable hackathon where spirituality meets innovation.
       </p>
-      <p class="text-slate-500 dark:text-slate-400 text-sm mt-4">
-        Total team: <span class="font-semibold text-primary dark:text-primary-light">15 members</span> (10 organizing + 5 volunteers)
-      </p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto mb-12 md:mb-14">
@@ -38,24 +35,6 @@ const { eventLeads, committee, volunteers = [] } = Astro.props;
         <TeamMemberShowcaseCard member={m} />
       ))}
     </div>
-
-    {volunteers.length > 0 && (
-      <div class="mt-16">
-        <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white text-center mb-8">
-          <span class="text-gradient">Volunteers</span>
-        </h3>
-        <div class="glass-card p-8 max-w-3xl mx-auto text-center">
-          <div class="text-5xl mb-4">🙋‍♂️🙋‍♀️</div>
-          <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-3">5 Volunteer Positions</h4>
-          <p class="text-slate-600 dark:text-slate-400 mb-4">
-            Announcement coming soon! We're looking for 5 dedicated volunteers to join our team.
-          </p>
-          <p class="text-primary dark:text-primary-light font-semibold">
-            Stay tuned for application details.
-          </p>
-        </div>
-      </div>
-    )}
 
     <p class="text-center text-slate-400 dark:text-slate-500 text-sm mt-12 max-w-xl mx-auto">
       More team members will be announced soon.

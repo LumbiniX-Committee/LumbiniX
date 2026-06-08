@@ -14,11 +14,12 @@
   }
 
   body {
-    @apply bg-bg text-slate-800 font-sans selection:bg-primary/20 selection:text-primary-dark;
-    @apply dark:bg-dark-bg dark:text-slate-200;
+    @apply bg-bg text-slate-800 font-sans selection:bg-slate-200 selection:text-slate-900;
+    @apply dark:bg-dark-bg dark:text-slate-200 dark:selection:bg-white/20 dark:selection:text-white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
   }
 
   h1, h2, h3, h4, h5, h6 {
