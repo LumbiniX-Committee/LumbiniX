@@ -8,12 +8,12 @@ import StatsEnhanced from "../features/landing/StatsEnhanced.astro";
 import AboutEnhanced from "../features/landing/AboutEnhanced.astro";
 import EligibilityEnhanced from "../features/landing/EligibilityEnhanced.astro";
 import Prizes from "../features/prizes/Prizes.astro";
-import Team from "../features/team/Team.astro";
+// import Team from "../features/team/Team.astro";
 import Sponsors from "../features/sponsors/Sponsors.astro";
 import FAQ from "../features/faq/FAQ.astro";
 import { eventMeta } from "../data/event";
 import { organizationSchema, eventSchema } from "../data/schema";
-import { eventLeads, organizingCommittee, volunteers } from "../data/teamMembers";
+// import { eventLeads, organizingCommittee, volunteers } from "../data/teamMembers";
 import { sponsors } from "../data/sponsors";
 import { faqs } from "../data/faqs";
 
@@ -41,7 +41,7 @@ const schemas = [organizationSchema, eventSchema];
       <AboutEnhanced />
       <EligibilityEnhanced />
       <Prizes />
-      <Team eventLeads={eventLeads} committee={organizingCommittee} volunteers={volunteers} />
+      {/* <Team eventLeads={eventLeads} committee={organizingCommittee} volunteers={volunteers} /> */}
       <Sponsors sponsors={sponsors} />
       <FAQ faqs={faqs} />
     </main>
