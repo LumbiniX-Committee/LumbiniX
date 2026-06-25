@@ -1,13 +1,13 @@
 ---
 import { eventMeta } from "../../data/event";
 
-const quickLinks = [
-  { label: "About", href: "/#about" },
-  { label: "Schedule", href: "/schedule" },
-  { label: "Prizes", href: "/prizes" },
-  { label: "Team", href: "/team" },
-  { label: "Register", href: eventMeta.registrationUrl },
-];
+// const quickLinks = [
+//   { label: "About", href: "/#about" },
+//   { label: "Schedule", href: "/schedule" },
+//   { label: "Prizes", href: "/prizes" },
+//   { label: "Team", href: "/team" },
+//   { label: "Register", href: eventMeta.registrationUrl },
+// ];
 
 const socialLinks = [
   {
@@ -31,9 +31,9 @@ const socialLinks = [
 <footer class="py-16 bg-slate-900 dark:bg-dark-bg border-t border-slate-800 dark:border-dark-border transition-colors duration-300">
   <div class="container-custom">
     <!-- Main Footer Content -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 mb-12">
       <!-- Brand Section -->
-      <div>
+      <div class="max-w-md">
         <a href="/" class="flex items-center gap-3 mb-6 group">
           <span class="text-primary text-3xl font-mono">&lt;/&gt;</span>
           <span class="text-2xl font-display font-bold text-white">Lumbini<span class="text-primary">X</span></span>
@@ -56,7 +56,7 @@ const socialLinks = [
         </div>
       </div>
 
-      <!-- Quick Links -->
+      <!-- Quick Links
       <div>
         <h4 class="text-xl font-bold text-primary mb-6">Quick Links</h4>
         <ul class="space-y-4">
@@ -72,6 +72,7 @@ const socialLinks = [
           ))}
         </ul>
       </div>
+      -->
 
       <!-- Contact -->
       <div>
