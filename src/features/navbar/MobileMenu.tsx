@@ -95,19 +95,16 @@ export default function MobileMenu({ items }: MobileMenuProps) {
                   {item.label}
                 </motion.a>
               ))}
-              <motion.a
-                href="#"
-                className="btn-primary w-full max-w-xs text-center"
-                onClick={() => setIsOpen(false)}
+              <motion.span
+                className="btn-primary w-full max-w-xs text-center cursor-not-allowed pointer-events-none"
                 custom={items.length}
                 variants={itemVariants}
                 initial="hidden"
                 animate="visible"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                aria-disabled="true"
               >
-                Register Now
-              </motion.a>
+                Registration Opening Soon
+              </motion.span>
             </nav>
           </motion.div>
         )}

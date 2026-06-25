@@ -97,28 +97,20 @@ export default function HeroContent({ event }: HeroContentProps) {
         variants={itemVariants}
         className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
       >
-        <motion.a
-          href={event.registrationUrl}
-          className="btn-primary btn-glow w-full sm:w-auto relative overflow-hidden group"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+        <span
+          className="btn-primary btn-glow w-full sm:w-auto relative overflow-hidden cursor-not-allowed pointer-events-none"
+          aria-disabled="true"
         >
-          <span className="relative z-10">Register Now</span>
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-primary-dark to-primary"
-            initial={{ x: '100%' }}
-            whileHover={{ x: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-        </motion.a>
-        <motion.a
+          <span className="relative z-10">Registration Opening Soon</span>
+        </span>
+        {/* <motion.a
           href="/schedule"
           className="btn-secondary w-full sm:w-auto"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
           View Schedule
-        </motion.a>
+        </motion.a> */}
       </motion.div>
 
       {/* Countdown */}

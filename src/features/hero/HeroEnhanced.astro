@@ -15,7 +15,6 @@ const { event } = Astro.props;
     <video
       id="hero-video"
       autoplay
-      loop
       playsinline
       class="absolute w-full h-full object-cover"
     >
@@ -44,26 +43,42 @@ const { event } = Astro.props;
         const mutedIcon = document.getElementById('muted-icon');
         const unmutedIcon = document.getElementById('unmuted-icon');
 
+        const LOOP_START = 6;
+        const END_BUFFER = 6;
+        let loopEnd = null;
+
+        function setLoopBounds() {
+          if (!video || !Number.isFinite(video.duration)) return;
+          loopEnd = Math.max(LOOP_START + 2, video.duration - END_BUFFER);
+        }
+
+        function restartLoop() {
+          if (!video) return;
+          video.currentTime = LOOP_START;
+        }
+
         if (video) {
-          video.currentTime = 6;
           video.volume = 0.3;
           video.muted = false;
 
+          video.addEventListener('loadedmetadata', function() {
+            setLoopBounds();
+            restartLoop();
+          });
+
+          video.addEventListener('timeupdate', function() {
+            if (loopEnd !== null && video.currentTime >= loopEnd) {
+              restartLoop();
+            }
+          });
+
+          video.addEventListener('ended', restartLoop);
+
           // Try to play with sound
           video.play().catch(function() {
-            // Browser blocked autoplay with sound, start muted
             video.muted = true;
             video.play();
             updateIcons(true);
-          });
-
-          video.addEventListener('loadedmetadata', function() {
-            video.currentTime = 6;
-          });
-
-          video.addEventListener('ended', function() {
-            video.currentTime = 6;
-            video.play();
           });
         }
 
@@ -143,26 +158,19 @@ const { event } = Astro.props;
 
     <!-- CTA Buttons -->
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-up-delay-2">
-      <a
-        href={event.registrationUrl}
-        class="group relative px-8 py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-full overflow-hidden shadow-xl shadow-primary/40 transition-all duration-300 hover:scale-105"
+      <span
+        class="relative px-8 py-4 bg-primary text-white font-bold rounded-full shadow-xl shadow-primary/40 cursor-not-allowed"
+        aria-disabled="true"
       >
-        <span class="relative z-10 flex items-center gap-2">
-          Register Now
-          <svg class="w-5 h-5 animate-arrow-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </span>
-        <!-- Shine effect -->
-        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 animate-shine"></div>
-      </a>
+        <span class="relative z-10">Registration Opening Soon</span>
+      </span>
 
-      <a
+      {/* <a
         href="/schedule"
         class="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300 hover:scale-105"
       >
         View Schedule
-      </a>
+      </a> */}
     </div>
 
     <!-- Countdown -->
