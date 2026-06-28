@@ -21,7 +21,7 @@ export default function FAQAccordion({ faqs }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="space-y-4 max-w-3xl mx-auto">
+    <div className="space-y-3 sm:space-y-4 max-w-3xl mx-auto">
       {faqs.map((faq, index) => {
         const isOpen = openIndex === index;
         return (
@@ -40,14 +40,15 @@ export default function FAQAccordion({ faqs }: FAQAccordionProps) {
           >
             <button
               onClick={() => setOpenIndex(isOpen ? null : index)}
-              className="w-full flex items-center justify-between p-6 text-left group"
+              className="w-full flex items-start sm:items-center justify-between gap-3 p-4 sm:p-6 text-left group"
             >
-              <span className="text-lg font-medium text-slate-900 dark:text-white group-hover:text-primary dark:group-hover:text-primary-light transition-colors">
+              <span className="text-base sm:text-lg font-medium text-slate-900 dark:text-white group-hover:text-primary dark:group-hover:text-primary-light transition-colors leading-snug">
                 {faq.question}
               </span>
               <motion.div
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="flex-shrink-0 mt-0.5 sm:mt-0"
               >
                 <ChevronDown
                   size={20}
@@ -67,7 +68,7 @@ export default function FAQAccordion({ faqs }: FAQAccordionProps) {
                   transition={{ duration: 0.3, ease: 'easeInOut' }}
                   className="overflow-hidden"
                 >
-                  <div className="p-6 pt-0 text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-dark-border">
+                  <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-dark-border">
                     {faq.answer}
                   </div>
                 </motion.div>

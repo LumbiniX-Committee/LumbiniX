@@ -77,9 +77,9 @@ export default function MobileMenu({ items }: MobileMenuProps) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 top-20 z-50 bg-white/95 dark:bg-dark-bg/95 backdrop-blur-lg"
+            className="fixed inset-0 top-16 sm:top-20 z-50 bg-white/95 dark:bg-dark-bg/95 backdrop-blur-lg"
           >
-            <nav className="flex flex-col items-center justify-center h-full gap-8 p-8">
+            <nav className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 p-6 sm:p-8">
               {items.map((item, i) => (
                 <motion.a
                   key={item.href}
@@ -89,14 +89,14 @@ export default function MobileMenu({ items }: MobileMenuProps) {
                   variants={itemVariants}
                   initial="hidden"
                   animate="visible"
-                  className="text-2xl font-display font-bold text-slate-800 dark:text-slate-100 hover:text-primary dark:hover:text-primary-light transition-colors"
+                  className="text-xl sm:text-2xl font-display font-bold text-slate-800 dark:text-slate-100 hover:text-primary dark:hover:text-primary-light transition-colors"
                   whileHover={{ scale: 1.05, x: 10 }}
                 >
                   {item.label}
                 </motion.a>
               ))}
               <motion.span
-                className="btn-primary w-full max-w-xs text-center cursor-not-allowed pointer-events-none"
+                className="btn-primary w-full max-w-xs text-center text-sm sm:text-base cursor-not-allowed pointer-events-none"
                 custom={items.length}
                 variants={itemVariants}
                 initial="hidden"

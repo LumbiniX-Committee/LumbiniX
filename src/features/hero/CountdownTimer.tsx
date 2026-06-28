@@ -35,7 +35,7 @@ function FlipCard({ value, label, index }: FlipCardProps) {
       transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
       className="relative"
     >
-      <div className="glass-card p-4 sm:p-6 flex flex-col items-center bg-white/10 backdrop-blur-md border border-white/20 shadow-lg shadow-black/20 overflow-hidden group hover:shadow-xl hover:bg-white/15 transition-all duration-300">
+      <div className="glass-card p-3 sm:p-4 md:p-6 flex flex-col items-center bg-white/10 backdrop-blur-md border border-white/20 shadow-lg shadow-black/20 overflow-hidden group hover:shadow-xl hover:bg-white/15 transition-all duration-300 min-w-0">
         {/* Glow effect on hover */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-accent/0 group-hover:from-primary/10 group-hover:to-accent/10 transition-all duration-300" />
 
@@ -47,14 +47,14 @@ function FlipCard({ value, label, index }: FlipCardProps) {
               animate={{ rotateX: 0, opacity: 1 }}
               exit={{ rotateX: 90, opacity: 0 }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="text-3xl sm:text-5xl font-display font-bold text-white drop-shadow-lg block"
+              className="text-2xl sm:text-3xl md:text-5xl font-display font-bold text-white drop-shadow-lg block"
             >
               {String(displayValue).padStart(2, '0')}
             </motion.span>
           </AnimatePresence>
         </div>
 
-        <span className="text-xs sm:text-sm uppercase tracking-widest text-white/70 font-bold mt-2 relative z-10">
+        <span className="text-[10px] sm:text-xs md:text-sm uppercase tracking-wide sm:tracking-widest text-white/70 font-bold mt-1 sm:mt-2 relative z-10 text-center">
           {label}
         </span>
 
@@ -113,7 +113,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-2xl mx-auto">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 w-full max-w-2xl mx-auto px-2 sm:px-0">
       {items.map((item, index) => (
         <FlipCard key={item.label} value={item.value} label={item.label} index={index} />
       ))}

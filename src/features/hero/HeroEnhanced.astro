@@ -23,7 +23,7 @@ const { event } = Astro.props;
     <!-- Sound toggle button -->
     <button
       id="sound-toggle"
-      class="absolute bottom-24 right-6 z-20 w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group"
+      class="absolute bottom-28 sm:bottom-24 right-4 sm:right-6 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300 group"
       aria-label="Toggle sound"
     >
       <!-- Muted icon -->
@@ -123,13 +123,13 @@ const { event } = Astro.props;
   <div class="absolute bottom-20 right-10 w-96 h-96 border border-white/10 rounded-full animate-spin-slower z-[1]"></div> -->
 
   <!-- Main content -->
-  <div class="container-custom relative z-10 text-center py-20">
+  <div class="container-custom relative z-10 text-center py-16 sm:py-20 px-2 sm:px-0">
     <!-- Main Heading -->
-    <div class="mb-8 animate-fade-up">
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-tight">
+    <div class="mb-6 sm:mb-8 animate-fade-up">
+      <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-tight">
         <span class="text-gradient-light relative inline-block">
           LUMBINIX
-          <svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12">
+          <svg class="absolute -bottom-1 sm:-bottom-2 left-0 w-full" viewBox="0 0 300 12">
             <path
               d="M0 6 Q75 0 150 6 T300 6"
               fill="none"
@@ -147,19 +147,19 @@ const { event } = Astro.props;
           </svg>
         </span>
         <br />
-        <span class="text-white drop-shadow-lg text-3xl md:text-5xl lg:text-6xl mt-4 block">Where Spirituality Meets Innovation</span>
+        <span class="text-white drop-shadow-lg text-2xl sm:text-3xl md:text-5xl lg:text-6xl mt-3 sm:mt-4 block px-2">Where Spirituality Meets Innovation</span>
       </h1>
     </div>
 
     <!-- Subtitle -->
-    <p class="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-up-delay drop-shadow-md">
+    <p class="text-base sm:text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-8 sm:mb-12 leading-relaxed animate-fade-up-delay drop-shadow-md px-2">
       {event.description}
     </p>
 
     <!-- CTA Buttons -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-up-delay-2">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 sm:mb-16 animate-fade-up-delay-2 px-4 sm:px-0">
       <span
-        class="relative px-8 py-4 bg-primary text-white font-bold rounded-full shadow-xl shadow-primary/40 cursor-not-allowed"
+        class="relative w-full sm:w-auto max-w-xs sm:max-w-none px-5 sm:px-8 py-3 sm:py-4 bg-primary text-white text-sm sm:text-base font-bold rounded-full shadow-xl shadow-primary/40 cursor-not-allowed text-center"
         aria-disabled="true"
       >
         <span class="relative z-10">Registration Opening Soon</span>
@@ -174,15 +174,15 @@ const { event } = Astro.props;
     </div>
 
     <!-- Countdown -->
-    <div class="animate-fade-up-delay-3">
-      <p class="text-sm font-semibold text-white/70 uppercase tracking-widest mb-6">
+    <div class="animate-fade-up-delay-3 px-2 sm:px-0">
+      <p class="text-xs sm:text-sm font-semibold text-white/70 uppercase tracking-widest mb-4 sm:mb-6">
         Event Starts In
       </p>
       <CountdownTimer client:load targetDate={event.countdownDate} />
     </div>
 
     <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce-slow">
+    <div class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 animate-bounce-slow hidden sm:flex">
       <div class="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center pt-2">
         <div class="w-1.5 h-3 bg-white rounded-full animate-scroll-indicator"></div>
       </div>
