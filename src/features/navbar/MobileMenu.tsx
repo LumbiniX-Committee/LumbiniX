@@ -68,7 +68,7 @@ export default function MobileMenu({ items }: MobileMenuProps) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 12 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
             className="fixed inset-x-0 top-16 bottom-0 z-[91] flex flex-col overflow-hidden bg-gradient-to-b from-white via-white to-slate-50 dark:from-dark-bg dark:via-dark-bg dark:to-dark-surface sm:top-20"
             role="dialog"
             aria-modal="true"
@@ -92,7 +92,7 @@ export default function MobileMenu({ items }: MobileMenuProps) {
 
               <nav className="space-y-3">
                 {items.map((item, index) => {
-                  const Icon = navIcons[item.label] ?? ChevronRight;
+                  const Icon = navIcons[item.label] ?? ChevronRight
 
                   return (
                     <motion.a
@@ -101,7 +101,10 @@ export default function MobileMenu({ items }: MobileMenuProps) {
                       onClick={closeMenu}
                       initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.05 + index * 0.06, duration: 0.25 }}
+                      transition={{
+                        delay: 0.05 + index * 0.06,
+                        duration: 0.25,
+                      }}
                       className="group flex min-h-[56px] items-center gap-4 rounded-2xl border border-slate-200/80 bg-white px-4 py-3 shadow-sm transition-all active:scale-[0.98] active:border-primary/30 active:bg-primary/5 dark:border-dark-border dark:bg-dark-card dark:active:bg-primary/10 touch-manipulation"
                     >
                       <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-active:bg-primary group-active:text-white dark:bg-primary/20 dark:text-primary-light">
@@ -115,7 +118,7 @@ export default function MobileMenu({ items }: MobileMenuProps) {
                         className="flex-shrink-0 text-slate-400 transition-transform group-active:translate-x-0.5 group-active:text-primary"
                       />
                     </motion.a>
-                  );
+                  )
                 })}
               </nav>
 
@@ -127,12 +130,14 @@ export default function MobileMenu({ items }: MobileMenuProps) {
                       Coming Soon
                     </span>
                   </div>
-                  <span
-                    className="flex min-h-[48px] w-full items-center justify-center rounded-full bg-primary px-4 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-primary/25 pointer-events-none"
-                    aria-disabled="true"
+                  <a
+                    href="https://forms.gle/TK7xwiLaMqBcFXR79"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex min-h-[48px] w-full items-center justify-center rounded-full bg-primary px-4 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-transform hover:scale-[1.01] active:scale-[0.99]"
                   >
-                    Registration Opening Soon
-                  </span>
+                    Register Here
+                  </a>
                 </div>
               </div>
             </div>
@@ -140,7 +145,7 @@ export default function MobileMenu({ items }: MobileMenuProps) {
         </>
       )}
     </AnimatePresence>
-  );
+  )
 
   return (
     <div className="relative z-[101] md:hidden">

@@ -97,12 +97,16 @@ export default function HeroContent({ event }: HeroContentProps) {
         variants={itemVariants}
         className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
       >
-        <span
-          className="btn-primary btn-glow w-full sm:w-auto relative overflow-hidden cursor-not-allowed pointer-events-none"
-          aria-disabled="true"
+        <motion.a
+          href={event.registrationUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="btn-primary btn-glow w-full sm:w-auto relative overflow-hidden"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          <span className="relative z-10">Registration Opening Soon</span>
-        </span>
+          <span className="relative z-10">Register Here</span>
+        </motion.a>
         {/* <motion.a
           href="/schedule"
           className="btn-secondary w-full sm:w-auto"
@@ -118,5 +122,5 @@ export default function HeroContent({ event }: HeroContentProps) {
         <CountdownTimer targetDate={event.countdownDate} />
       </motion.div>
     </motion.div>
-  );
+  )
 }
