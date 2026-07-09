@@ -28,8 +28,8 @@ export const eventSchema: SchemaEvent = {
   '@type': 'Event',
   name: eventMeta.name,
   description: eventMeta.description,
-  startDate: '2026-08-07T09:00:00+05:45',
-  endDate: '2026-08-09T18:00:00+05:45',
+  startDate: '2026-08-08T09:00:00+05:45',
+  endDate: '2026-08-10T18:00:00+05:45',
   eventStatus: 'https://schema.org/EventScheduled',
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   location: {

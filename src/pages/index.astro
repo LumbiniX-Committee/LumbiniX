@@ -34,6 +34,14 @@ const schemas = [organizationSchema, eventSchema];
     pageKey="home"
     schema={schemas}
   >
+    <link
+      slot="head"
+      rel="preload"
+      href="/backgroundvideo.mp4"
+      as="video"
+      type="video/mp4"
+      fetchpriority="high"
+    />
     <Navbar />
     <main>
       <HeroEnhanced event={eventMeta} />

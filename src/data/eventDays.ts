@@ -3,7 +3,7 @@ import type { ScheduleDayBlock } from "../types";
 export const eventScheduleDays: ScheduleDayBlock[] = [
   {
     dayTitle: "Day 1: Kickoff & build phase",
-    bsDay: "Shrawan 22, 2083 BS",
+    bsDay: "Shrawan 23, 2083 BS",
     rows: [
       { time: "7:00 – 8:00", activity: "Registration & breakfast" },
       { time: "8:00 – 9:00", activity: "Opening ceremony" },
@@ -19,7 +19,7 @@ export const eventScheduleDays: ScheduleDayBlock[] = [
     ],
   },
   {
-    dayTitle: "Day 2: Intensive development", bsDay: "Shrawan 23, 2083 BS",
+    dayTitle: "Day 2: Intensive development", bsDay: "Shrawan 24, 2083 BS",
     rows: [
       { time: "7:00 – 8:00", activity: "Breakfast" },
       { time: "11:00 – 12:00", activity: "Lunch break" },
@@ -31,7 +31,7 @@ export const eventScheduleDays: ScheduleDayBlock[] = [
   },
   {
     dayTitle: "Day 3: Submission, demos & awards",
-    bsDay: "Shrawan 24, 2083 BS",
+    bsDay: "Shrawan 25, 2083 BS",
     rows: [
       { time: "7:00 – 8:00", activity: "Breakfast" },
       { time: "9:00", activity: "Final submission deadline" },

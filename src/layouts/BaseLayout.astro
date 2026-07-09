@@ -41,6 +41,8 @@ if (pageKey && pageSEO[pageKey]) {
 
     <SEO seo={seo} schema={schema} />
 
+    <slot name="head" />
+
     <!-- Prevent flash on page load -->
     <script is:inline>
       const theme = localStorage.getItem('theme');

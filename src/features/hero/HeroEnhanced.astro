@@ -12,11 +12,19 @@ const { event } = Astro.props;
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
   <!-- Video Background -->
   <div class="absolute inset-0 z-0">
+    <div
+      id="hero-video-poster"
+      class="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 transition-opacity duration-500"
+      aria-hidden="true"
+    ></div>
     <video
       id="hero-video"
       autoplay
+      muted
       playsinline
-      class="absolute w-full h-full object-cover"
+      preload="auto"
+      fetchpriority="high"
+      class="absolute w-full h-full object-cover opacity-0 transition-opacity duration-500"
     >
       <source src="/backgroundvideo.mp4" type="video/mp4" />
     </video>
@@ -27,18 +35,19 @@ const { event } = Astro.props;
       aria-label="Toggle sound"
     >
       <!-- Muted icon -->
-      <svg id="muted-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg id="muted-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
       </svg>
       <!-- Unmuted icon (shown by default) -->
-      <svg id="unmuted-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg id="unmuted-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
       </svg>
     </button>
     <script is:inline>
       document.addEventListener('DOMContentLoaded', function() {
         const video = document.getElementById('hero-video');
+        const poster = document.getElementById('hero-video-poster');
         const soundToggle = document.getElementById('sound-toggle');
         const mutedIcon = document.getElementById('muted-icon');
         const unmutedIcon = document.getElementById('unmuted-icon');
@@ -57,14 +66,27 @@ const { event } = Astro.props;
           video.currentTime = LOOP_START;
         }
 
+        function revealVideo() {
+          if (!video) return;
+          video.classList.remove('opacity-0');
+          video.classList.add('opacity-100');
+          if (poster) {
+            poster.classList.add('opacity-0');
+            window.setTimeout(function() {
+              poster.style.display = 'none';
+            }, 500);
+          }
+        }
+
         if (video) {
           video.volume = 0.3;
-          video.muted = false;
 
           video.addEventListener('loadedmetadata', function() {
             setLoopBounds();
             restartLoop();
           });
+
+          video.addEventListener('canplay', revealVideo, { once: true });
 
           video.addEventListener('timeupdate', function() {
             if (loopEnd !== null && video.currentTime >= loopEnd) {
@@ -74,10 +96,15 @@ const { event } = Astro.props;
 
           video.addEventListener('ended', restartLoop);
 
-          // Try to play with sound
-          video.play().catch(function() {
+          video.play().then(function() {
+            revealVideo();
+            video.muted = false;
+            return video.play();
+          }).then(function() {
+            updateIcons(false);
+          }).catch(function() {
             video.muted = true;
-            video.play();
+            video.play().then(revealVideo);
             updateIcons(true);
           });
         }
