@@ -8,7 +8,7 @@ export const sponsors: Sponsor[] = [
     url: "https://www.lcc.edu.np/",
     role: "Academic Partner",
     description:
-      "Established in 2069 B.S. and affiliated with Tribhuvan University, LCC leads CSIT education in Tilottama, Butwal — guided by “Learn, Innovate, Earn & Lead the Nation”.",
+      "Established in 2069 B.S. and affiliated with Tribhuvan University, LCC leads CSIT education in Tilottama, Butwal  guided by “Learn, Innovate, Earn & Lead the Nation”.",
     message:
       "As the A.Campus Chief of Lumbini City College, I am honored to lead this vibrant academic community in Tilottama, Butwal. With state-of-the-art facilities and experienced faculty, we have successfully graduated thousands of students who are now thriving professionals in Nepal and abroad. I encourage all students to embrace the opportunities at LCC, develop your potential, and contribute to the ever-evolving fields of technology and innovation. Your journey here is not just about earning a degree, but about transforming into global citizens ready to make a meaningful impact.",
   },
