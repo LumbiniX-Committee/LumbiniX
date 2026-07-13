@@ -7,44 +7,74 @@ interface Props {
 
 const { sponsors } = Astro.props;
 
-const tiers = {
-  platinum: "grid-cols-1 md:grid-cols-2 lg:grid-cols-2 max-w-3xl mx-auto h-48",
-  gold: "grid-cols-2 md:grid-cols-3 lg:grid-cols-3 h-32",
-  silver: "grid-cols-2 md:grid-cols-4 lg:grid-cols-4 h-24",
-  bronze: "grid-cols-3 md:grid-cols-6 lg:grid-cols-6 h-20",
+const tierOrder = ["platinum", "gold", "silver", "bronze"] as const;
+
+const tierStyles = {
+  platinum: "grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto min-h-[140px] sm:min-h-[160px]",
+  gold: "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-4xl mx-auto min-h-[120px] sm:min-h-[140px]",
+  silver: "grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-4xl mx-auto min-h-[120px]",
+  bronze: "grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 min-h-[88px]",
 };
 
-const groupedSponsors = sponsors.reduce((acc, sponsor) => {
-  if (!acc[sponsor.tier]) acc[sponsor.tier] = [];
-  acc[sponsor.tier].push(sponsor);
+const groupedSponsors = tierOrder.reduce((acc, tier) => {
+  const tierSponsors = sponsors.filter((sponsor) => sponsor.tier === tier);
+  if (tierSponsors.length > 0) acc[tier] = tierSponsors;
   return acc;
 }, {} as Record<string, Sponsor[]>);
+
+function getLinkProps(url: string) {
+  if (!url || url === "#") {
+    return { href: undefined, target: undefined, rel: undefined };
+  }
+
+  if (url.startsWith("tel:") || url.startsWith("mailto:")) {
+    return { href: url, target: undefined, rel: undefined };
+  }
+
+  return { href: url, target: "_blank", rel: "noopener noreferrer" };
+}
 ---
 
-<div class="space-y-20">
+<div class="space-y-14 sm:space-y-20">
   {Object.entries(groupedSponsors).map(([tier, tierSponsors]) => (
     <div>
-      <h3 class="text-center text-sm font-bold uppercase tracking-widest text-slate-400 mb-10 flex items-center justify-center gap-4">
-        <div class="h-px w-12 bg-slate-200"></div>
+      <h3 class="text-center text-xs sm:text-sm font-bold uppercase tracking-widest text-slate-400 mb-8 sm:mb-10 flex items-center justify-center gap-4">
+        <div class="h-px w-8 sm:w-12 bg-slate-200 dark:bg-dark-border"></div>
         {tier} Partners
-        <div class="h-px w-12 bg-slate-200"></div>
+        <div class="h-px w-8 sm:w-12 bg-slate-200 dark:bg-dark-border"></div>
       </h3>
-      <div class={`grid gap-8 items-center ${tiers[tier as keyof typeof tiers]}`}>
-        {tierSponsors.map((sponsor) => (
-          <a 
-            href={sponsor.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="glass-card p-6 h-full flex items-center justify-center group hover:border-primary/40 transition-all shadow-sm hover:shadow-md bg-white/50"
-            aria-label={`Visit ${sponsor.name} website`}
-          >
-            <img 
-              src={sponsor.logo} 
-              alt={sponsor.name} 
-              class="max-h-full max-w-full grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
-            />
-          </a>
-        ))}
+      <div class={`grid gap-4 sm:gap-6 md:gap-8 items-stretch ${tierStyles[tier as keyof typeof tierStyles]}`}>
+        {tierSponsors.map((sponsor) => {
+          const link = getLinkProps(sponsor.url);
+          const Tag = link.href ? "a" : "div";
+
+          return (
+            <Tag
+              href={link.href}
+              target={link.target}
+              rel={link.rel}
+              class="glass-card p-5 sm:p-6 h-full min-h-[120px] flex flex-col items-center justify-center gap-3 group hover:border-primary/40 transition-all shadow-sm hover:shadow-md bg-white dark:bg-dark-card"
+              aria-label={sponsor.name}
+            >
+              <img
+                src={sponsor.logo}
+                alt={sponsor.name}
+                class="max-h-16 sm:max-h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+              <div class="text-center">
+                <p class="text-sm font-semibold text-slate-800 dark:text-slate-100">{sponsor.name}</p>
+                {sponsor.role && (
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">{sponsor.role}</p>
+                )}
+                {sponsor.description && !sponsor.message && (
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed max-w-[16rem] mx-auto">
+                    {sponsor.description}
+                  </p>
+                )}
+              </div>
+            </Tag>
+          );
+        })}
       </div>
     </div>
   ))}

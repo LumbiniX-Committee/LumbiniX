@@ -18,7 +18,9 @@ export const organizationSchema: SchemaOrganization = {
   logo: `${siteConfig.siteUrl}/lumbinix logo.png`,
   sameAs: [
     'https://www.facebook.com/share/18hWaP5zwX/?mibextid=wwXIfr',
-    'https://www.instagram.com/insta.lumbinix?igsh=eW9kZHNnZTM0ejJ3'
+    'https://www.instagram.com/insta.lumbinix?igsh=eW9kZHNnZTM0ejJ3',
+    'https://www.tiktok.com/@tiktok.lumbinix?lang=en',
+    'https://discord.gg/WRwdEq2g2n'
   ]
 }
 

@@ -30,6 +30,9 @@ export interface Sponsor {
   logo: string;
   tier: 'platinum' | 'gold' | 'silver' | 'bronze';
   url: string;
+  description?: string;
+  message?: string;
+  role?: string;
 }
 
 export interface FAQ {

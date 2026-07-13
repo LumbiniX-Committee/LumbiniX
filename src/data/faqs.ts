@@ -24,7 +24,7 @@ export const faqs: FAQ[] = [
   {
     question: "When does registration open?",
     answer:
-      "Registration will open soon. Follow our official Facebook, Instagram, and TikTok pages for announcements. The registration button on this site will be enabled once applications go live.",
+      "Registration will open soon. Follow our official Facebook, Instagram, TikTok, and Discord channels for announcements. The registration button on this site will be enabled once applications go live.",
   },
   {
     question: "What should I bring?",
@@ -39,6 +39,6 @@ export const faqs: FAQ[] = [
   {
     question: "How can I contact the organizers?",
     answer:
-      "You can reach us at contact@lumbinix.com or call +977-9765573177, +977-9827505260, or +977-9827078800. You can also message us through our official social media channels.",
+      "You can reach us at contact@lumbinix.com or call +977-9765573177, +977-9827505260, or +977-9827078800. You can also message us through our official social media channels, or join our Discord community at https://discord.gg/WRwdEq2g2n.",
   },
 ];
