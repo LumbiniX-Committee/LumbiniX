@@ -8,6 +8,7 @@ import {
   CircleHelp,
   ShieldCheck,
   Sparkles,
+  Mail,
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -24,6 +25,7 @@ const navIcons: Record<string, typeof Handshake> = {
   Sponsors: Handshake,
   FAQ: CircleHelp,
   Conduct: ShieldCheck,
+  Contact: Mail,
 };
 
 export default function MobileMenu({ items }: MobileMenuProps) {
@@ -86,7 +88,7 @@ export default function MobileMenu({ items }: MobileMenuProps) {
                   Lumbini<span className="text-primary">X</span> Menu
                 </h2>
                 <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-500 dark:text-slate-400">
-                  Jump to sponsors, FAQs, and event guidelines.
+                  Jump to sponsors, FAQs, guidelines, and contact.
                 </p>
               </div>
 
