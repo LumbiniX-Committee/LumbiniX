@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SEO from "../components/SEO.astro";
+import WelcomeModal from "../components/WelcomeModal";
 import { pageSEO } from "../data/seo";
 import type { PageSEO } from "../types/seo";
 
@@ -64,6 +65,8 @@ if (pageKey && pageSEO[pageKey]) {
     </div>
 
     <slot />
+
+    <WelcomeModal client:load />
 
     <script>
       function isInsideGradientText(node: Node): boolean {
