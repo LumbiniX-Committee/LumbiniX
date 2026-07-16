@@ -13,13 +13,13 @@ export const sponsors: Sponsor[] = [
       "As the A.Campus Chief of Lumbini City College, I am honored to lead this vibrant academic community in Tilottama, Butwal. With state-of-the-art facilities and experienced faculty, we have successfully graduated thousands of students who are now thriving professionals in Nepal and abroad. I encourage all students to embrace the opportunities at LCC, develop your potential, and contribute to the ever-evolving fields of technology and innovation. Your journey here is not just about earning a degree, but about transforming into global citizens ready to make a meaningful impact.",
   },
   {
-    name: "Hotel Madani",
-    logo: "/sponsors/hotel-madani.png",
+    name: "Shine Resunga Development Bank Ltd.",
+    logo: "/sponsors/shine-resunga-bank.png",
     tier: "bronze",
-    url: "https://www.facebook.com/HotelMadani/",
-    role: "Official Hospitality Partner",
+    url: "https://srdb.com.np/",
+    role: "Official Banking Partner",
     description:
-      "Tilottama-9, Shankharpur, Rupandehi — hospitality partner supporting LumbiniX guests and teams throughout the event.",
+      "A trusted development bank supporting community growth and innovation across Lumbini Province.",
   },
   {
     name: "Inovex Media & Tech",
@@ -31,6 +31,24 @@ export const sponsors: Sponsor[] = [
       "Official media and tech partner delivering digital solutions, web, and media support for LumbiniX.",
   },
   {
+    name: "Paramount Boarding High School",
+    logo: "/sponsors/paramount-school.png",
+    tier: "bronze",
+    url: "https://www.paramountschool.edu.np/",
+    role: "Official Education Partner",
+    description:
+      "A symbol of quality education since 1995 — Official Education Partner of LumbiniX Hackathon 2026.",
+  },
+  {
+    name: "Hotel Madani",
+    logo: "/sponsors/hotel-madani.png",
+    tier: "bronze",
+    url: "https://www.facebook.com/HotelMadani/",
+    role: "Official Hospitality Partner",
+    description:
+      "Tilottama-9, Shankharpur, Rupandehi — hospitality partner supporting LumbiniX guests and teams throughout the event.",
+  },
+  {
     name: "Ek Surup",
     logo: "/sponsors/ek-surup.png",
     tier: "bronze",
@@ -40,15 +58,6 @@ export const sponsors: Sponsor[] = [
       "Famous chiya pasal in Butwal. Tilottama-5, Machapuchre Path, Manigram · Contact: 9766720516.",
   },
   {
-    name: "Shine Resunga Development Bank Ltd.",
-    logo: "/sponsors/shine-resunga-bank.png",
-    tier: "bronze",
-    url: "https://srdb.com.np/",
-    role: "Official Banking Partner",
-    description:
-      "A trusted development bank supporting community growth and innovation across Lumbini Province.",
-  },
-  {
     name: "Mawali Ghar",
     logo: "/sponsors/mawali-ghar.png",
     tier: "bronze",
@@ -56,15 +65,6 @@ export const sponsors: Sponsor[] = [
     role: "Official Fooding Partner",
     description:
       "मावली भान्छा — serving home-style meals for LumbiniX teams. “मिठास मामा घरकै”.",
-  },
-  {
-    name: "Paramount Boarding High School",
-    logo: "/sponsors/paramount-school.png",
-    tier: "bronze",
-    url: "https://www.paramountschool.edu.np/",
-    role: "Official Education Partner",
-    description:
-      "A symbol of quality education since 1995 — Official Education Partner of LumbiniX Hackathon 2026.",
   },
   {
     name: "QFX Cinemas",

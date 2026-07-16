@@ -38,6 +38,7 @@ export interface Sponsor {
 export interface FAQ {
   question: string;
   answer: string;
+  category: 'about' | 'logistics' | 'guidelines' | 'other';
 }
 
 export interface Prize {
