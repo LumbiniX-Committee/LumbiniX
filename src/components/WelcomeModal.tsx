@@ -16,6 +16,7 @@ function DiscordIcon({ className = "w-7 h-7" }: { className?: string }) {
 export default function WelcomeModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [daysLeft, setDaysLeft] = useState<number | null>(null);
 
   const closeModal = useCallback(() => {
     sessionStorage.setItem(STORAGE_KEY, "true");
@@ -28,6 +29,9 @@ export default function WelcomeModal() {
     if (!dismissed) {
       setIsOpen(true);
     }
+
+    const distance = new Date(eventMeta.countdownDate).getTime() - Date.now();
+    setDaysLeft(Math.max(0, Math.ceil(distance / (1000 * 60 * 60 * 24))));
   }, []);
 
   useEffect(() => {
@@ -116,8 +120,16 @@ export default function WelcomeModal() {
                   Join 500+ innovators for Nepal&apos;s premier hackathon. Secure your spot and connect with the community on Discord.
                 </p>
 
-                <p className="mt-2 text-xs font-medium text-slate-500 dark:text-slate-400 sm:text-sm">
-                  {eventMeta.date}
+                <p className="mt-3 inline-flex items-center rounded-full border border-accent/40 bg-accent/15 px-3.5 py-1.5 text-xs font-semibold text-slate-800 dark:border-accent/30 dark:bg-accent/10 dark:text-accent sm:text-sm">
+                  Registration ends Shrawan 17 at 8:00 PM
+                  {daysLeft !== null && daysLeft > 0 && (
+                    <span className="ml-1.5 text-primary dark:text-primary-light">
+                      · {daysLeft} {daysLeft === 1 ? "day" : "days"} left
+                    </span>
+                  )}
+                  {daysLeft === 0 && (
+                    <span className="ml-1.5 text-primary dark:text-primary-light">· ends today</span>
+                  )}
                 </p>
               </div>
 
