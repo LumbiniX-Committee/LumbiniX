@@ -1,28 +1,32 @@
 ---
 const stats = [
   {
-    value: "10",
+    target: 10,
+    suffix: "",
     label: "Selected Teams",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-10 h-10">
       <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
     </svg>`
   },
   {
-    value: "3",
+    target: 3,
+    suffix: "",
     label: "Days of Innovation",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-10 h-10">
       <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
     </svg>`
   },
   {
-    value: "100+",
+    target: 100,
+    suffix: "+",
     label: "Expected Registrations",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-10 h-10">
       <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
     </svg>`
   },
   {
-    value: "7",
+    target: 7,
+    suffix: "",
     label: "Provinces United",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="w-10 h-10">
       <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z" />
@@ -89,10 +93,14 @@ const stats = [
               <div class="text-accent group-hover:text-white transition-colors duration-300 icon-glow scale-90 sm:scale-100" set:html={stat.icon} />
             </div>
 
-            <!-- Value -->
+            <!-- Value (animated count-up) -->
             <div class="relative text-center">
-              <span class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight">
-                {stat.value}
+              <span
+                class="stat-value text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-bold text-white tracking-tight tabular-nums"
+                data-target={stat.target}
+                data-suffix={stat.suffix}
+              >
+                0{stat.suffix}
               </span>
             </div>
 
@@ -111,6 +119,49 @@ const stats = [
       ))}
     </div>
   </div>
+
+  <script is:inline>
+    (function () {
+      const counters = document.querySelectorAll('.stat-value');
+      if (!counters.length) return;
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function runCountUp(el) {
+        const target = Number(el.getAttribute('data-target')) || 0;
+        const suffix = el.getAttribute('data-suffix') || '';
+        const duration = 1800;
+
+        if (prefersReduced) {
+          el.textContent = target + suffix;
+          return;
+        }
+
+        const start = performance.now();
+
+        function tick(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          // easeOutExpo for a snappy finish
+          const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            runCountUp(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.6 });
+
+      counters.forEach((el) => observer.observe(el));
+    })();
+  </script>
 </section>
 
 <style>

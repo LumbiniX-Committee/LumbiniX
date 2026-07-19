@@ -131,59 +131,58 @@ function linkLabel(url: string) {
         )}
 
         {otherSponsors.length > 0 && (
-          <div class="rounded-3xl bg-white dark:bg-dark-card border border-slate-200/80 dark:border-dark-border shadow-sm px-6 py-10 sm:px-10 sm:py-12 md:px-14 md:py-14">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10 sm:gap-x-8 sm:gap-y-12 items-stretch">
-              {otherSponsors.map((sponsor) => {
-                const link = getLinkProps(sponsor.url);
-                const label = linkLabel(sponsor.url);
-                const logoFrame = getLogoFrame(sponsor.name);
-                const isCircle = logoFrame.frame === "circle";
+          <div class="rounded-3xl bg-white dark:bg-dark-card border border-slate-200/80 dark:border-dark-border shadow-sm px-4 py-10 sm:px-6 sm:py-12 md:py-14 overflow-hidden">
+            <p class="mb-8 sm:mb-10 text-center text-xs sm:text-sm font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+              Powered by our partners
+            </p>
 
-                return (
-                  <article class="flex h-full flex-col">
-                    <div class="mb-5 flex h-28 items-center justify-start">
+            <div class="marquee group">
+              <div class="marquee-track">
+                {[...otherSponsors, ...otherSponsors].map((sponsor, index) => {
+                  const link = getLinkProps(sponsor.url);
+                  const logoFrame = getLogoFrame(sponsor.name);
+                  const isCircle = logoFrame.frame === "circle";
+                  const isClone = index >= otherSponsors.length;
+                  const Tag = link ? "a" : "div";
+
+                  return (
+                    <Tag
+                      href={link?.href}
+                      target={link && "target" in link ? link.target : undefined}
+                      rel={link && "rel" in link ? link.rel : undefined}
+                      aria-hidden={isClone ? "true" : undefined}
+                      tabindex={isClone ? -1 : undefined}
+                      class="marquee-item group/card flex w-[220px] sm:w-[240px] flex-shrink-0 flex-col items-center gap-4 rounded-2xl border border-slate-200 dark:border-dark-border bg-slate-50/60 dark:bg-dark-surface/60 px-6 py-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10"
+                    >
                       <div class:list={[
-                        "flex items-center justify-center overflow-hidden border border-slate-200 dark:border-dark-border",
+                        "flex items-center justify-center overflow-hidden border border-slate-200 dark:border-dark-border transition-transform duration-300 group-hover/card:scale-105",
                         isCircle
-                          ? "h-28 w-28 rounded-full bg-slate-50 dark:bg-dark-surface"
-                          : "h-24 w-full max-w-[11.5rem] rounded-2xl px-2",
+                          ? "h-24 w-24 rounded-full bg-white dark:bg-dark-card"
+                          : "h-20 w-full max-w-[10rem] rounded-xl px-2 bg-white dark:bg-dark-card",
                         logoFrame.containerClass,
                       ]}>
                         <img
                           src={sponsor.logo}
                           alt={`${sponsor.name} logo`}
+                          loading="lazy"
                           class={logoFrame.imageClass ?? "h-full w-full object-contain p-2"}
                         />
                       </div>
-                    </div>
 
-                    <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2 min-h-[1.75rem] sm:min-h-[1.875rem]">
-                      {sponsor.name}
-                    </h3>
-
-                    <p class="text-xs font-medium text-primary dark:text-primary-light mb-2 min-h-[1rem]">
-                      {sponsor.role ?? ""}
-                    </p>
-
-                    <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed flex-1">
-                      {sponsor.description ?? ""}
-                    </p>
-
-                    {link && label ? (
-                      <a
-                        href={link.href}
-                        target={"target" in link ? link.target : undefined}
-                        rel={"rel" in link ? link.rel : undefined}
-                        class="mt-5 inline-block text-sm font-semibold text-cyan-600 dark:text-cyan-400 underline underline-offset-4 hover:text-cyan-700 dark:hover:text-cyan-300 transition-colors"
-                      >
-                        {label}
-                      </a>
-                    ) : (
-                      <span class="mt-5 inline-block h-5" aria-hidden="true" />
-                    )}
-                  </article>
-                );
-              })}
+                      <div class="text-center">
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white leading-snug">
+                          {sponsor.name}
+                        </h3>
+                        {sponsor.role && (
+                          <p class="mt-1 text-xs font-medium text-primary dark:text-primary-light">
+                            {sponsor.role}
+                          </p>
+                        )}
+                      </div>
+                    </Tag>
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}
@@ -219,3 +218,64 @@ function linkLabel(url: string) {
     </div>
   </div>
 </section>
+
+<style>
+  /* Infinite auto-scroll marquee — track holds two identical sets,
+     so animating -50% loops seamlessly. */
+  .marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 1.25rem;
+    padding: 0.5rem 0;
+    animation: marquee-scroll 32s linear infinite;
+    will-change: transform;
+  }
+
+  /* Pause on hover / focus for readability + interaction */
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-50% - 0.625rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+    .marquee {
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+  }
+</style>
