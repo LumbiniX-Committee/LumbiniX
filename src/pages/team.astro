@@ -3,13 +3,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Navbar from "../features/navbar/Navbar.astro";
 import Team from "../features/team/Team.astro";
 import Footer from "../features/footer/Footer.astro";
-import { eventLeads, organizingCommittee, volunteers } from "../data/teamMembers";
+import { eventLeads, organizingCommittee } from "../data/teamMembers";
 import { organizationSchema, generateBreadcrumbSchema } from "../data/schema";
 import { breadcrumbs } from "../data/seo";
 
 const schemas = [
   organizationSchema,
-  generateBreadcrumbSchema(breadcrumbs.team)
+  generateBreadcrumbSchema(breadcrumbs.team),
 ];
 ---
 
@@ -18,8 +18,8 @@ const schemas = [
   schema={schemas}
 >
   <Navbar />
-  <main class="pt-12">
-    <Team eventLeads={eventLeads} committee={organizingCommittee} volunteers={volunteers} />
+  <main>
+    <Team eventLeads={eventLeads} committee={organizingCommittee} />
   </main>
 
   <Footer />

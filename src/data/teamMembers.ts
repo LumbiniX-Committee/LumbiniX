@@ -1,137 +1,62 @@
 import type { TeamMemberProfile } from "../types";
 
-function avatar(seed: string): string {
-  return `https://i.pravatar.cc/512?u=${encodeURIComponent(seed)}`;
+/** Photos live in `public/organizer photo/` — encode spaces for reliable URLs. */
+function organizerPhoto(filename: string): string {
+  return `/organizer%20photo/${encodeURIComponent(filename)}`;
 }
 
-function socialDummy(slug: string): Pick<TeamMemberProfile, "twitterUrl" | "linkedinUrl"> {
-  return {
-    twitterUrl: `https://x.com/lumbinix_${slug}`,
-    linkedinUrl: `https://www.linkedin.com/in/lumbinix_${slug}`,
-  };
-}
-
-/**
- * @param publicImage — filename in `public/` (e.g. `Ayush.png` → `/Ayush.png`)
- * @param linkedinUrl — optional real LinkedIn profile URL
- */
 function member(
   name: string,
   role: string,
-  slug: string,
-  publicImage?: string,
-  linkedinUrl?: string
+  filename: string,
+  linkedinUrl = ""
 ): TeamMemberProfile {
-  const social = socialDummy(slug);
   return {
     name,
     role,
-    image: publicImage ? `/${publicImage}` : avatar(slug),
-    twitterUrl: social.twitterUrl,
-    linkedinUrl: linkedinUrl ?? social.linkedinUrl,
+    image: organizerPhoto(filename),
+    twitterUrl: "",
+    linkedinUrl,
   };
 }
 
+/** Event leads — featured on the team page. */
 export const eventLeads: TeamMemberProfile[] = [
   member(
     "Aayush Chapagain",
     "Event Lead",
-    "aayush-chapagain",
-    "Ayush.png",
+    "Aayush Chapagain.PNG",
     "https://www.linkedin.com/in/aayushchapagain/"
   ),
   member(
     "Abishkar Dhenga",
     "Event Lead",
-    "abishkar-dhenga",
-    "Abishkardhenga.jpeg",
+    "Aabishkar Dhenga.jpeg",
     "https://www.linkedin.com/in/abishkar-dhenga/"
   ),
 ];
 
+/** Full organizing committee from the LumbiniX poster (excl. event leads). */
 export const organizingCommittee: TeamMemberProfile[] = [
   member(
-    "Kalpit Nepal",
-    "Supervisor",
-    "kalpit-nepal",
-    "kalpit.jpeg",
-    "https://www.linkedin.com/in/kalpit-nepal-0086aa331/"
-  ),
-  member(
     "Nishan Bhurtel",
-    "Event Coordinator",
-    "nishan-bhurtel",
-    "Nishanbhurtel.png",
+    "Supervisor",
+    "Nishan Bhurtel.jpeg",
     "https://www.linkedin.com/in/nishan-bhurtel-a726312b7/"
   ),
-  member(
-    "Abhay Verma",
-    "Graphic Designer Lead",
-    "abhay-verma",
-    "abhayverma.jpeg",
-    "https://www.linkedin.com/in/abhayverma22/"
-  ),
-  member(
-    "Raunak Amatya",
-    "Graphic Designer Lead",
-    "raunak-amatya",
-    "raunak.jpeg",
-    "https://www.linkedin.com/in/raunak-amatya-241102335/"
-  ),
-  {
-    name: "Ishwor Bhattarai",
-    role: "Logistic Lead",
-    image: avatar("ishwor-bhattarai"),
-    twitterUrl: "",
-    linkedinUrl: "",
-  },
-  {
-    name: "Smarika Gyawali",
-    role: "Vice Logistic Lead",
-    image: "/smarika.jpg",
-    twitterUrl: "",
-    linkedinUrl: "",
-  },
+  member("Aayam Regmi", "Director", "Aayam Regmi.jpeg", "https://www.linkedin.com/in/aayamregmi/"),
+  member("Prabesh Khatri", "Design Lead", "Prabesh Khatri.jpg", "https://www.linkedin.com/in/prabeshkhatri/"),
+  member("Suhan Shrestha", "Marketing Lead", "Suhan Sherestha.jpeg", "https://www.linkedin.com/in/suhan-shrestha-9223b1247/"),
+  member("Sushil Basnet", "Logistic Lead", "Sushil Basnet.jpeg", "https://www.linkedin.com/in/sushil-basnet-59198036b/"),
+  member("Smarika Gyawali", "Executive", "smarika Gyawali.jpeg", "https://www.linkedin.com/in/smarika-gyawali-6b9375355/"),
+  member("Punaram Gaire", "Executive", "Punaram Gaire.jpeg"),
+  member("Janam Kafle", "Executive", "Janam Kafle.jpeg", "https://www.linkedin.com/in/janam-kafle-455789425/"),
+  member("Rabina Sunar", "Executive", "Rabina Sunar.jpeg", "https://www.linkedin.com/in/rabina-sunar-439194269/?skipRedirect=true"),
+  member("Barsha Bhandari", "Executive", "Barsha Bhandari.jpeg", "https://www.linkedin.com/in/barsha-bhandari-2087ba3ab/"),
+  member("Deepa Bhusal", "Executive", "Deepa .jpeg", "https://www.linkedin.com/in/dipa-bhusal-9725a7352/"),
+  member("Epsita Malla", "Executive", "Epsita malla.jpeg", "https://www.linkedin.com/in/epsita-malla-54b41a31b/"),
+  member("Bipin K.C. Bhattarai", "Executive", "Bipin K.C. Bhattarai.jpeg", "https://www.linkedin.com/in/bipin-bhattarai-63a3063a0/"),
 ];
 
-// Volunteers - 5 positions (announcement coming soon)
-export const volunteers: TeamMemberProfile[] = [
-  {
-    name: "Volunteer 1",
-    role: "Volunteer",
-    image: avatar("volunteer-1"),
-    ...socialDummy("volunteer-1"),
-  },
-  {
-    name: "Volunteer 2",
-    role: "Volunteer",
-    image: avatar("volunteer-2"),
-    ...socialDummy("volunteer-2"),
-  },
-  {
-    name: "Volunteer 3",
-    role: "Volunteer",
-    image: avatar("volunteer-3"),
-    ...socialDummy("volunteer-3"),
-  },
-  {
-    name: "Volunteer 4",
-    role: "Volunteer",
-    image: avatar("volunteer-4"),
-    ...socialDummy("volunteer-4"),
-  },
-  {
-    name: "Volunteer 5",
-    role: "Volunteer",
-    image: avatar("volunteer-5"),
-    ...socialDummy("volunteer-5"),
-  },
-];
-
-// Hidden for now - will be announced soon
-// member("Ganesh Prasad Bhandari", "Documentation & Finance Manager", "ganesh-prasad-bhandari"),
-// member("Aayush Poudel", "Tech Lead", "aayush-poudel", "Aayushpoudel.jpeg"),
-// member("Bibek Bhusal", "Tech Lead", "bibek-bhusal"),
-// member("Suhan Shrestha", "Content Lead", "suhan-shrestha", "suhan.jpeg"),
-// member("Samyam Khanal", "Host / MC", "samyam-khanal", "samyamkhanal.jpg"),
-// member("Smarika Gyawali", "Host / MC", "smarika-gyawali");
+/** Volunteers — not announced yet. */
+export const volunteers: TeamMemberProfile[] = [];

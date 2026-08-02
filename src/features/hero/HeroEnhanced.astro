@@ -187,29 +187,39 @@ const { event } = Astro.props;
 
     <!-- CTA Buttons -->
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 sm:mb-16 animate-fade-up-delay-2 px-4 sm:px-0">
-      <a
-        href={event.registrationUrl}
-        target="_blank"
-        rel="noreferrer"
-        class="relative w-full sm:w-auto max-w-xs sm:max-w-none px-5 sm:px-8 py-3 sm:py-4 bg-primary text-white text-sm sm:text-base font-bold rounded-full shadow-xl shadow-primary/40 text-center transition-transform hover:scale-[1.01] active:scale-[0.99]"
-      >
-        <span class="relative z-10">Register Here</span>
-      </a>
-
-      {/* <a
-        href="/schedule"
-        class="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-bold rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300 hover:scale-105"
-      >
-        View Schedule
-      </a> */}
+      {event.registrationOpen ? (
+        <a
+          href={event.registrationUrl}
+          target="_blank"
+          rel="noreferrer"
+          class="relative w-full sm:w-auto max-w-xs sm:max-w-none px-5 sm:px-8 py-3 sm:py-4 bg-primary text-white text-sm sm:text-base font-bold rounded-full shadow-xl shadow-primary/40 text-center transition-transform hover:scale-[1.01] active:scale-[0.99]"
+        >
+          <span class="relative z-10">Register Here</span>
+        </a>
+      ) : (
+        <span
+          class="relative w-full sm:w-auto max-w-xs sm:max-w-none px-5 sm:px-8 py-3 sm:py-4 bg-white/15 text-white/90 text-sm sm:text-base font-bold rounded-full border border-white/25 text-center cursor-not-allowed"
+          aria-disabled="true"
+        >
+          Registration Closed
+        </span>
+      )}
     </div>
 
-    <!-- Countdown -->
+    <!-- Countdown / status -->
     <div class="animate-fade-up-delay-3 px-2 sm:px-0">
-      <p class="text-xs sm:text-sm font-semibold text-white/70 uppercase tracking-widest mb-4 sm:mb-6">
-        Registration Ends In
-      </p>
-      <CountdownTimer client:load targetDate={event.countdownDate} />
+      {event.registrationOpen ? (
+        <>
+          <p class="text-xs sm:text-sm font-semibold text-white/70 uppercase tracking-widest mb-4 sm:mb-6">
+            Registration Ends In
+          </p>
+          <CountdownTimer client:load targetDate={event.countdownDate} />
+        </>
+      ) : (
+        <p class="text-sm sm:text-base font-semibold text-accent uppercase tracking-widest">
+          Registration is now closed · Stay tuned for selection updates
+        </p>
+      )}
     </div>
 
     <!-- Scroll indicator -->

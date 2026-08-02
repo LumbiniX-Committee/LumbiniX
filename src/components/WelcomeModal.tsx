@@ -117,34 +117,49 @@ export default function WelcomeModal() {
                 </h2>
 
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
-                  Join 500+ innovators for Nepal&apos;s premier hackathon. Secure your spot and connect with the community on Discord.
+                  Join 500+ innovators for Nepal&apos;s premier hackathon.
+                  {eventMeta.registrationOpen
+                    ? " Secure your spot and connect with the community on Discord."
+                    : " Registration is closed — stay tuned for selection updates, and connect with the community on Discord."}
                 </p>
 
-                <p className="mt-3 inline-flex items-center rounded-full border border-accent/40 bg-accent/15 px-3.5 py-1.5 text-xs font-semibold text-slate-800 dark:border-accent/30 dark:bg-accent/10 dark:text-accent sm:text-sm">
-                  Registration ends Shrawan 17 at 8:00 PM
-                  {daysLeft !== null && daysLeft > 0 && (
-                    <span className="ml-1.5 text-primary dark:text-primary-light">
-                      · {daysLeft} {daysLeft === 1 ? "day" : "days"} left
-                    </span>
-                  )}
-                  {daysLeft === 0 && (
-                    <span className="ml-1.5 text-primary dark:text-primary-light">· ends today</span>
-                  )}
-                </p>
+                {eventMeta.registrationOpen ? (
+                  <p className="mt-3 inline-flex items-center rounded-full border border-accent/40 bg-accent/15 px-3.5 py-1.5 text-xs font-semibold text-slate-800 dark:border-accent/30 dark:bg-accent/10 dark:text-accent sm:text-sm">
+                    Registration ends Shrawan 17 at 8:00 PM
+                    {daysLeft !== null && daysLeft > 0 && (
+                      <span className="ml-1.5 text-primary dark:text-primary-light">
+                        · {daysLeft} {daysLeft === 1 ? "day" : "days"} left
+                      </span>
+                    )}
+                    {daysLeft === 0 && (
+                      <span className="ml-1.5 text-primary dark:text-primary-light">· ends today</span>
+                    )}
+                  </p>
+                ) : (
+                  <p className="mt-3 inline-flex items-center rounded-full border border-slate-300/60 bg-slate-100 px-3.5 py-1.5 text-xs font-semibold text-slate-700 dark:border-dark-border dark:bg-dark-surface dark:text-slate-300 sm:text-sm">
+                    Registration closed
+                  </p>
+                )}
               </div>
 
               <div className="space-y-3">
-                <a
-                  href={eventMeta.registrationUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-4 text-sm font-bold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-dark hover:shadow-primary/40 sm:text-base"
-                >
-                  Register Now
-                  <svg className="h-4 w-4 transition group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                  </svg>
-                </a>
+                {eventMeta.registrationOpen ? (
+                  <a
+                    href={eventMeta.registrationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-4 text-sm font-bold text-white shadow-lg shadow-primary/30 transition hover:bg-primary-dark hover:shadow-primary/40 sm:text-base"
+                  >
+                    Register Now
+                    <svg className="h-4 w-4 transition group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
+                ) : (
+                  <div className="flex w-full items-center justify-center rounded-2xl border border-slate-200 bg-slate-100 px-5 py-4 text-sm font-bold text-slate-500 dark:border-dark-border dark:bg-dark-surface dark:text-slate-400 sm:text-base">
+                    Registration Closed
+                  </div>
+                )}
 
                 <a
                   href={DISCORD_URL}

@@ -1,6 +1,5 @@
 ---
 import type { TeamMemberProfile } from "../../types";
-import TeamMemberShowcaseCard from "./TeamMemberShowcaseCard.astro";
 
 interface Props {
   eventLeads: TeamMemberProfile[];
@@ -8,57 +7,220 @@ interface Props {
   volunteers?: TeamMemberProfile[];
 }
 
-const { eventLeads, committee, volunteers = [] } = Astro.props;
+const { eventLeads, committee } = Astro.props;
+
+const leadership = [
+  ...committee.filter((m) => m.role === "Supervisor"),
+  ...eventLeads,
+  ...committee.filter((m) => m.role === "Director"),
+];
+
+const leads = committee.filter((m) =>
+  ["Design Lead", "Marketing Lead", "Logistic Lead"].includes(m.role)
+);
+
+const executives = committee.filter((m) => m.role === "Executive");
+const totalMembers = eventLeads.length + committee.length;
 ---
 
-<section id="team" class="py-24 bg-white dark:bg-dark-bg transition-colors duration-300">
-  <div class="container-custom">
-    <div class="max-w-3xl mx-auto text-center mb-14 md:mb-16">
-      <p class="text-primary dark:text-primary-light font-semibold text-sm uppercase tracking-widest mb-3">Organizing team</p>
-      <h2 class="text-4xl md:text-5xl mb-4 font-display font-bold text-slate-900 dark:text-white">
-        Meet the m<span class="text-gradient">i</span>nds beh<span class="text-gradient">i</span>nd <span class="text-gradient">LumbiniX</span>
+<section id="team" class="relative section-padding overflow-hidden">
+  <!-- Brand purple backdrop -->
+  <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-primary-dark to-slate-900"></div>
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-[480px] h-[480px] bg-primary/30 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-accent/15 rounded-full blur-[100px]"></div>
+  </div>
+  <div
+    class="absolute inset-0 opacity-[0.08] pointer-events-none"
+    style="background-image: linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px); background-size: 56px 56px;"
+  ></div>
+
+  <div class="container-custom relative z-10">
+    <div class="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+      <p class="inline-flex items-center gap-2 text-accent font-semibold text-sm uppercase tracking-[0.3em] mb-4">
+        <span class="text-white/50 font-mono">&lt;/&gt;</span>
+        Meet the Organizing Team
+        <span class="text-white/50 font-mono">&lt;/&gt;</span>
+      </p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-4">
+        The people behind <span class="text-accent">LumbiniX</span>
       </h2>
-      <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-base md:text-lg">
-        Students from <span class="font-semibold text-slate-800 dark:text-white">Lumbini City College</span>, representing diverse
-        roles, one mission: run an unforgettable hackathon where spirituality meets innovation.
-      </p>
-      <p class="text-slate-500 dark:text-slate-400 text-sm mt-4">
-        Total team: <span class="font-semibold text-primary dark:text-primary-light">15 members</span> (10 organizing + 5 volunteers)
+      <p class="text-white/70 leading-relaxed text-base md:text-lg">
+        Students from <span class="font-semibold text-white">Lumbini City College</span> — {totalMembers} organizers,
+        one mission: spirituality meets innovation.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto mb-12 md:mb-14">
-      {eventLeads.map((m) => (
-        <TeamMemberShowcaseCard member={m} featured />
-      ))}
+    <!-- Leadership row -->
+    <div class="mb-12 md:mb-16">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
+        {leadership.map((m) => (
+          <article class="team-card group text-center" data-reveal>
+            <div class="relative mx-auto mb-4 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36">
+              <div class="absolute inset-0 rounded-full bg-accent/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <img
+                src={m.image}
+                alt={m.name}
+                width="144"
+                height="144"
+                loading="lazy"
+                class="relative w-full h-full rounded-full object-cover border-[3px] border-accent/80 shadow-xl shadow-black/30 group-hover:border-accent group-hover:scale-105 transition-all duration-300"
+              />
+            </div>
+            <h3 class="text-sm sm:text-base font-display font-bold text-accent uppercase tracking-wide leading-snug">
+              {m.name}
+            </h3>
+            <p class="mt-1 text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-white/70">
+              {m.role}
+            </p>
+            {m.linkedinUrl && (
+              <a
+                href={m.linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex mt-3 text-white/40 hover:text-accent transition-colors"
+                aria-label={`${m.name} on LinkedIn`}
+              >
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"></path>
+                </svg>
+              </a>
+            )}
+          </article>
+        ))}
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-      {committee.map((m) => (
-        <TeamMemberShowcaseCard member={m} />
-      ))}
-    </div>
-
-    {volunteers.length > 0 && (
-      <div class="mt-16">
-        <h3 class="text-2xl font-display font-bold text-slate-900 dark:text-white text-center mb-8">
-          <span class="text-gradient">Volunteers</span>
-        </h3>
-        <div class="glass-card p-8 max-w-3xl mx-auto text-center">
-          <div class="text-5xl mb-4">🙋‍♂️🙋‍♀️</div>
-          <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-3">5 Volunteer Positions</h4>
-          <p class="text-slate-600 dark:text-slate-400 mb-4">
-            Announcement coming soon! We're looking for 5 dedicated volunteers to join our team.
-          </p>
-          <p class="text-primary dark:text-primary-light font-semibold">
-            Stay tuned for application details.
-          </p>
+    <!-- Department leads -->
+    {leads.length > 0 && (
+      <div class="mb-12 md:mb-16">
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 md:gap-8 max-w-3xl mx-auto">
+          {leads.map((m) => (
+            <article class="team-card group text-center" data-reveal>
+              <div class="relative mx-auto mb-4 w-24 h-24 sm:w-28 sm:h-28">
+                <div class="absolute inset-0 rounded-full bg-primary-light/40 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <img
+                  src={m.image}
+                  alt={m.name}
+                  width="112"
+                  height="112"
+                  loading="lazy"
+                  class="relative w-full h-full rounded-full object-cover border-[3px] border-white/30 shadow-lg shadow-black/25 group-hover:border-accent/70 group-hover:scale-105 transition-all duration-300"
+                />
+              </div>
+              <h3 class="text-sm font-display font-bold text-accent uppercase tracking-wide leading-snug">
+                {m.name}
+              </h3>
+              <p class="mt-1 text-[11px] font-semibold uppercase tracking-widest text-white/65">
+                {m.role}
+              </p>
+              {m.linkedinUrl && (
+                <a
+                  href={m.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex mt-3 text-white/40 hover:text-accent transition-colors"
+                  aria-label={`${m.name} on LinkedIn`}
+                >
+                  <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"></path>
+                  </svg>
+                </a>
+              )}
+            </article>
+          ))}
         </div>
       </div>
     )}
 
-    <p class="text-center text-slate-400 dark:text-slate-500 text-sm mt-12 max-w-xl mx-auto">
-      More team members will be announced soon.
-    </p>
+    <!-- Executives -->
+    {executives.length > 0 && (
+      <div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
+          {executives.map((m) => (
+            <article class="team-card group text-center" data-reveal>
+              <div class="relative mx-auto mb-3 w-20 h-20 sm:w-24 sm:h-24">
+                <img
+                  src={m.image}
+                  alt={m.name}
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  class="relative w-full h-full rounded-full object-cover border-2 border-white/25 shadow-md shadow-black/20 group-hover:border-accent/60 group-hover:scale-105 transition-all duration-300"
+                />
+              </div>
+              <h3 class="text-xs sm:text-sm font-display font-bold text-accent uppercase tracking-wide leading-snug">
+                {m.name}
+              </h3>
+              <p class="mt-1 text-[10px] sm:text-[11px] font-semibold uppercase tracking-widest text-white/60">
+                {m.role}
+              </p>
+              {m.linkedinUrl && (
+                <a
+                  href={m.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex mt-2 text-white/40 hover:text-accent transition-colors"
+                  aria-label={`${m.name} on LinkedIn`}
+                >
+                  <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"></path>
+                  </svg>
+                </a>
+              )}
+            </article>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div class="mt-14 md:mt-16 mx-auto max-w-2xl rounded-2xl border border-white/15 bg-white/5 backdrop-blur-sm px-6 py-5 text-center">
+      <p class="text-sm sm:text-base text-white/75 leading-relaxed">
+        Special thanks to everyone who has contributed behind the scenes.
+        <span class="font-semibold text-accent"> Your support means a lot.</span>
+      </p>
+    </div>
   </div>
 </section>
+
+<style>
+  .team-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .team-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const cards = document.querySelectorAll("#team .team-card");
+    if (!cards.length) return;
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      cards.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const siblings = Array.from(el.parentElement?.children || []);
+          const index = siblings.indexOf(el);
+          el.style.transitionDelay = `${Math.max(index, 0) * 60}ms`;
+          el.classList.add("is-visible");
+          observer.unobserve(el);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -30px 0px" }
+    );
+
+    cards.forEach((el) => observer.observe(el));
+  })();
+</script>

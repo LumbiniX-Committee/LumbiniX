@@ -41,7 +41,7 @@ export const faqs: FAQ[] = [
     category: "guidelines",
     question: "What do selected teams receive?",
     answer:
-      "Selected teams get the full 3-day hackathon experience with meals, accommodation, mentorship, fun activities, certificates, and the chance to compete for prizes and recognition. Exclusive perks for selected teams may include Claude Pro access, Canva Pro access, a guided Lumbini tour, and additional partner benefits. A participation fee applies only after your team is selected for the final event.",
+      "Selected teams get the full 3-day hackathon experience with meals, accommodation, mentorship, fun activities, certificates, and the chance to compete for prizes and recognition. Exclusive perks include one Claude account, one Emergent account, and one Canva account for each selected team, a guided Lumbini tour, and additional partner benefits. A participation fee applies only after your team is selected for the final event.",
   },
   {
     category: "other",

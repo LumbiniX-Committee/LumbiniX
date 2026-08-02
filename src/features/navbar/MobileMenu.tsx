@@ -129,17 +129,12 @@ export default function MobileMenu({ items }: MobileMenuProps) {
                   <div className="mb-3 flex items-center gap-2 text-primary dark:text-primary-light">
                     <Sparkles size={16} />
                     <span className="text-xs font-semibold uppercase tracking-[0.18em]">
-                      Coming Soon
+                      Registration
                     </span>
                   </div>
-                  <a
-                    href="https://forms.gle/TK7xwiLaMqBcFXR79"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex min-h-[48px] w-full items-center justify-center rounded-full bg-primary px-4 py-3 text-center text-sm font-semibold text-white shadow-lg shadow-primary/25 transition-transform hover:scale-[1.01] active:scale-[0.99]"
-                  >
-                    Register Here
-                  </a>
+                  <div className="flex min-h-[48px] w-full items-center justify-center rounded-full bg-slate-200 px-4 py-3 text-center text-sm font-semibold text-slate-500 dark:bg-dark-surface dark:text-slate-400">
+                    Registration Closed
+                  </div>
                 </div>
               </div>
             </div>

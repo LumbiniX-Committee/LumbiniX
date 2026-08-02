@@ -97,29 +97,33 @@ export default function HeroContent({ event }: HeroContentProps) {
         variants={itemVariants}
         className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
       >
-        <motion.a
-          href={event.registrationUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="btn-primary btn-glow w-full sm:w-auto relative overflow-hidden"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          <span className="relative z-10">Register Here</span>
-        </motion.a>
-        {/* <motion.a
-          href="/schedule"
-          className="btn-secondary w-full sm:w-auto"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
-          View Schedule
-        </motion.a> */}
+        {event.registrationOpen ? (
+          <motion.a
+            href={event.registrationUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="btn-primary btn-glow w-full sm:w-auto relative overflow-hidden"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <span className="relative z-10">Register Here</span>
+          </motion.a>
+        ) : (
+          <span className="w-full sm:w-auto rounded-full border border-slate-300 bg-slate-100 px-8 py-3 text-center font-semibold text-slate-500 dark:border-dark-border dark:bg-dark-surface dark:text-slate-400">
+            Registration Closed
+          </span>
+        )}
       </motion.div>
 
       {/* Countdown */}
       <motion.div variants={itemVariants}>
-        <CountdownTimer targetDate={event.countdownDate} />
+        {event.registrationOpen ? (
+          <CountdownTimer targetDate={event.countdownDate} />
+        ) : (
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary dark:text-primary-light">
+            Registration is now closed
+          </p>
+        )}
       </motion.div>
     </motion.div>
   )

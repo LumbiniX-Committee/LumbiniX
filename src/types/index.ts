@@ -5,6 +5,7 @@ export interface EventMeta {
   description: string;
   registrationUrl: string;
   countdownDate: string; // ISO format for countdown
+  registrationOpen: boolean;
 }
 
 export interface RoadmapMilestone {
