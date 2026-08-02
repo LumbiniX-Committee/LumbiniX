@@ -41,7 +41,7 @@ export const siteConfig: SEOConfig = {
 export const pageSEO: Record<string, PageSEO> = {
   home: {
     title: 'LumbiniX Hackathon 2026 | Innovation Meets Opportunity in Nepal',
-    description: 'Join 500+ students at LumbiniX Hackathon 2026 in Lumbini, Nepal. 48-hour innovation challenge with ₹5 lakh in prizes. Register now for Nepal\'s biggest student tech event.',
+    description: 'Join 500+ students at LumbiniX Hackathon 2026 in Lumbini, Nepal. 48-hour innovation challenge with ₹2 Lakh in prizes. Register now for Nepal\'s biggest student tech event.',
     keywords: [...keywords.primary, ...keywords.secondary.slice(0, 3)],
     canonical: '/',
     ogType: 'website'
@@ -61,8 +61,8 @@ export const pageSEO: Record<string, PageSEO> = {
     ogType: 'article'
   },
   prizes: {
-    title: 'Prizes & Awards | ₹5 Lakh Prize Pool | LumbiniX Hackathon',
-    description: 'Win from ₹5 lakh prize pool at LumbiniX Hackathon 2026. First prize ₹2 lakh, second prize ₹1.5 lakh, third prize ₹1 lakh, plus special category awards and swag.',
+    title: 'Prizes & Awards | ₹2 Lakh Prize Pool | LumbiniX Hackathon',
+    description: 'Win from ₹2 Lakh prize pool at LumbiniX Hackathon 2026. First prize ₹2 lakh, second prize ₹1.2 Lakh, third prize ₹1 lakh, plus special category awards and swag.',
     keywords: ['hackathon prizes Nepal', 'tech competition rewards', ...keywords.primary],
     canonical: '/prizes',
     ogType: 'article'
