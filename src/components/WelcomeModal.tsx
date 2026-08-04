@@ -113,7 +113,15 @@ export default function WelcomeModal() {
                 </span>
 
                 <h2 id="welcome-modal-title" className="text-2xl font-display font-bold text-slate-900 dark:text-white sm:text-3xl">
-                  Registrations are <span className="text-gradient">Open</span>
+                  {eventMeta.registrationOpen ? (
+                    <>
+                      Registrations are <span className="text-gradient">Open</span>
+                    </>
+                  ) : (
+                    <>
+                      Registrations are <span className="text-gradient">Closed</span>
+                    </>
+                  )}
                 </h2>
 
                 <p className="mt-3 max-w-md text-sm leading-relaxed text-slate-600 dark:text-slate-300 sm:text-base">
