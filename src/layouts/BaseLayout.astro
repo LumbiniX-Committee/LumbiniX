@@ -10,9 +10,10 @@ interface Props {
   description?: string;
   pageKey?: string;
   schema?: Array<Record<string, any>>;
+  showWelcome?: boolean;
 }
 
-const { title, description, pageKey, schema = [] } = Astro.props;
+const { title, description, pageKey, schema = [], showWelcome = true } = Astro.props;
 
 // Resolve SEO object
 let seo: PageSEO;
@@ -66,7 +67,7 @@ if (pageKey && pageSEO[pageKey]) {
 
     <slot />
 
-    <WelcomeModal client:load />
+    {showWelcome && <WelcomeModal client:load />}
 
     <script>
       function isInsideGradientText(node: Node): boolean {

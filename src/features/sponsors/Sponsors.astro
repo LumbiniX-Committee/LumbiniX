@@ -16,50 +16,28 @@ const logoFrames: Record<string, { frame: LogoFrame; containerClass?: string; im
   "Hotel Madani": {
     frame: "wide",
     containerClass: "bg-[#fbf4e2] dark:bg-[#fbf4e2]",
-    imageClass: "h-full w-full object-contain",
+    imageClass: "h-full w-full object-contain p-1",
   },
   "Inovex Media & Tech": {
-    frame: "circle",
-    containerClass: "bg-black",
-    imageClass: "h-full w-full object-cover",
-  },
-  "Ek Surup": {
-    frame: "circle",
-    imageClass: "h-full w-full object-cover",
-  },
-  "Shine Resunga Development Bank Ltd.": {
     frame: "wide",
-    containerClass: "bg-white dark:bg-white",
-    imageClass: "h-full w-full object-contain",
-  },
-  "Mawali Ghar": {
-    frame: "circle",
-    containerClass: "bg-white dark:bg-white",
+    containerClass: "bg-black",
     imageClass: "h-full w-full object-contain p-2",
-  },
-  "Paramount Boarding High School": {
-    frame: "circle",
-    containerClass: "bg-white dark:bg-white",
-    imageClass: "h-full w-full object-contain p-1",
   },
   "QFX Cinemas": {
     frame: "wide",
     containerClass: "bg-black",
-    imageClass: "h-full w-full object-contain",
-  },
-  "Butwal Computer Supplier": {
-    frame: "wide",
-    containerClass: "bg-white dark:bg-white",
-    imageClass: "h-full w-full object-contain",
-  },
-  "The Chocolatier Nepal": {
-    frame: "circle",
-    imageClass: "h-full w-full object-cover",
+    imageClass: "h-full w-full object-contain p-2",
   },
 };
 
 function getLogoFrame(name: string) {
-  return logoFrames[name] ?? { frame: "circle" as const, imageClass: "h-full w-full object-contain p-2" };
+  return (
+    logoFrames[name] ?? {
+      frame: "wide" as const,
+      containerClass: "bg-white dark:bg-white",
+      imageClass: "h-full w-full object-contain p-2",
+    }
+  );
 }
 
 function getLinkProps(url: string) {
@@ -247,7 +225,7 @@ function linkLabel(url: string) {
     width: max-content;
     gap: 1.25rem;
     padding: 0.5rem 0;
-    animation: marquee-scroll 32s linear infinite;
+    animation: marquee-scroll 90s linear infinite;
     will-change: transform;
   }
 

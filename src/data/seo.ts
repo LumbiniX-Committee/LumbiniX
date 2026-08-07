@@ -94,6 +94,13 @@ export const pageSEO: Record<string, PageSEO> = {
     keywords: ['hackathon rules', 'code of conduct', 'event guidelines', ...keywords.primary],
     canonical: '/code-of-conduct',
     ogType: 'article'
+  },
+  'digital-opening': {
+    title: 'Digital Opening Ceremony | LumbiniX Hackathon 2026',
+    description: 'Official digital ribbon-cutting ceremony for LumbiniX Hackathon 2026 — guest signature followed by an interactive ribbon cut.',
+    keywords: ['digital opening', 'ribbon cutting', 'LumbiniX ceremony', ...keywords.primary],
+    canonical: '/digital-opening',
+    ogType: 'website'
   }
 }
 

@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import DigitalOpeningCeremony from "../features/digital-opening/DigitalOpeningCeremony";
+---
+
+<BaseLayout pageKey="digital-opening" showWelcome={false}>
+  <main>
+    <DigitalOpeningCeremony client:load />
+  </main>
+</BaseLayout>
